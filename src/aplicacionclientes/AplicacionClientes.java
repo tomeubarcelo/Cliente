@@ -5,6 +5,9 @@
  */
 package aplicacionclientes;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  *
  * @author tomeu
@@ -27,6 +30,23 @@ public class AplicacionClientes {
         
         cliente1.setNombre(cliente1.pedirNombre());
         System.out.println(cliente1.getNombre());
+        
+        ArrayList arrayClientes = new ArrayList();
+
+        for (int i=0; i < 5; i++) {
+            Cliente cliente2 = new Cliente();
+            arrayClientes.add( cliente2 );
+        }
+        Iterator it = arrayClientes.iterator();
+        while ( it.hasNext() ) {
+        Object objeto = it.next();
+        Cliente producto = (Cliente)objeto;
+        System.out.println(producto);
+        }
+        for (int i=0; i < arrayClientes.size(); i++) {
+            System.out.println(i+" - "+arrayClientes.get(i));
+        }
+        System.out.println(arrayClientes.size());
     }
     
 }

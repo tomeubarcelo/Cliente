@@ -31,6 +31,14 @@ public class Cliente {
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    Cliente() throws Exception {
+        this.NIF = null;
+        this.nombre = pedirNombre();
+        this.telefono = 0;
+        this.correo = null;
+        this.fechaNacimiento = null;
+    }
     
     //GETTERS Y SETTERS
     public String getNIF() {
