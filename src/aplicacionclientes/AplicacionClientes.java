@@ -16,6 +16,14 @@ public class AplicacionClientes {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Cliente cliente1 = new Cliente("43218383A", "Tomeu", 680968942, "tomeu.95@gmail.com", "06-11-1995");
+        
+        System.out.println(cliente1.getNIF());
+        System.out.println(cliente1.getNombre());
+        System.out.println(cliente1.getTelefono());
+        System.out.println(cliente1.getCorreo());
+        System.out.println(cliente1.getFechaNacimiento());
     }
     
 }
