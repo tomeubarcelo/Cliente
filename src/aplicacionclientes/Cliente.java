@@ -33,11 +33,8 @@ public class Cliente {
     }
 
     Cliente() throws Exception {
-        this.NIF = null;
-        this.nombre = pedirNombre();
-        this.telefono = 0;
-        this.correo = null;
-        this.fechaNacimiento = null;
+        this.NIF = NIF;
+        this.nombre = nombre;
     }
     
     //GETTERS Y SETTERS
@@ -111,4 +108,13 @@ public class Cliente {
         }
         return true;
     }
+    
+    public String pedirDni() throws Exception{
+        System.out.println ("Introduzca su DNI con el formato 12345678A:");
+        String dniCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
+        return dniCliente;
+    }
+    
+    
+    
 }

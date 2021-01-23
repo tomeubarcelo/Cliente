@@ -20,18 +20,18 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
         
-        Cliente cliente1 = new Cliente("43218383A", "Tomeu", 680968942, "tomeu.95@gmail.com", "06-11-1995");
+        //Cliente cliente1 = new Cliente("43218383A", "Tomeu", 680968942, "tomeu.95@gmail.com", "06-11-1995");
         
-        System.out.println(cliente1.getNIF());
+        /*System.out.println(cliente1.getNIF());
         System.out.println(cliente1.getNombre());
         System.out.println(cliente1.getTelefono());
         System.out.println(cliente1.getCorreo());
         System.out.println(cliente1.getFechaNacimiento());
         
         cliente1.setNombre(cliente1.pedirNombre());
-        System.out.println(cliente1.getNombre());
+        System.out.println(cliente1.getNombre());*/
         
-        ArrayList arrayClientes = new ArrayList();
+        /*ArrayList arrayClientes = new ArrayList();
 
         for (int i=0; i < 5; i++) {
             Cliente cliente2 = new Cliente();
@@ -47,6 +47,38 @@ public class AplicacionClientes {
             System.out.println(i+" - "+arrayClientes.get(i));
         }
         System.out.println(arrayClientes.size());
+        */
+        System.out.println("Cliente 1");
+        Cliente cliente1 = new Cliente();
+        String nombre = cliente1.pedirNombre();
+        String nif = cliente1.pedirDni();
+        cliente1.setNombre(nombre);
+        cliente1.setNIF(nif);
+        
+        System.out.println("Nombre: "+cliente1.getNombre());
+        System.out.println("NIF: "+cliente1.getNIF());
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        System.out.println("---------\nCliente 2");
+        Cliente cliente2 = new Cliente();
+        System.out.println(cliente2);
+        
+        Cliente cliente3 = new Cliente();
+        System.out.println(cliente3);
+        
+        Cliente cliente4 = new Cliente();
+        System.out.println(cliente4);
     }
     
 }
