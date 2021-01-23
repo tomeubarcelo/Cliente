@@ -6,6 +6,8 @@
 package aplicacionclientes;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -110,11 +112,47 @@ public class Cliente {
     }
     
     public String pedirDni() throws Exception{
+        Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
+       
         System.out.println ("Introduzca su DNI con el formato 12345678A:");
         String dniCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
+        Matcher mat = pat.matcher(dniCliente);
+
+        String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
+
+        // Lo siguiente devuelve true
+        System.out.println(Pattern.matches(dniRegexp, dniCliente));
+
+        
+        char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+        
+        
+        String numDni = dniCliente.substring(0, 8);
+        int numbers = Integer.parseInt(numDni);
+        int resto = numbers%23;
+        System.out.println(numbers);
+        System.out.println(resto);
+        System.out.println(letras[resto]);
+        char letraDni = dniCliente.charAt(dniCliente.length() - 1);
+        System.out.println(letraDni);
+        if(letras[resto]==letraDni) {
+            System.out.println("DNI CORRECTO");
+        } else{
+            System.out.println("Uep");
+        }
+        
         return dniCliente;
     }
     
+    public void validarDni(int numeroDNI){
+
+        char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+        
+        int resto;
+        resto = numeroDNI % 23;
+        System.out.println("DNI COMPLETO: "+numeroDNI+letras[resto]);
+
+    }
     
     
 }
