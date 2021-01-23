@@ -116,32 +116,48 @@ public class Cliente {
        
         System.out.println ("Introduzca su DNI con el formato 12345678A:");
         String dniCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
-        Matcher mat = pat.matcher(dniCliente);
 
         String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
 
         // Lo siguiente devuelve true
-        System.out.println(Pattern.matches(dniRegexp, dniCliente));
+        //System.out.println(Pattern.matches(dniRegexp, dniCliente));
+        try {
+            if (Pattern.matches(dniRegexp, dniCliente)) {
+                System.out.println("dni correcto");
+            } else {
+                System.err.println ("DNI incorrecto");
+                throw new Exception("DNI incorrecto");
+            }
+        } catch (Exception e) {
+            System.err.println ("DNI incorrecto");
+            throw new Exception("DNI incorrecto");
+        }
 
-        
+        //array de caracteres que pueden ir con los digitos del dni
         char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
         
-        
+        //guardamos los digitos
         String numDni = dniCliente.substring(0, 8);
+        //los pasamos a int
         int numbers = Integer.parseInt(numDni);
+        //calculamos el resto del numero de dni entre 23
         int resto = numbers%23;
         System.out.println(numbers);
         System.out.println(resto);
         System.out.println(letras[resto]);
+        //guardamos el caracter del dni
         char letraDni = dniCliente.charAt(dniCliente.length() - 1);
         System.out.println(letraDni);
+        //para calcular la letra que deberia ser, cogeremos el caracter del array en la posicion del resto
+        //si la letra inroducida es igual que la letra que tocaria ser es correcto
         if(letras[resto]==letraDni) {
             System.out.println("DNI CORRECTO");
+            return dniCliente;
         } else{
-            System.out.println("Uep");
+            System.err.println ("DNI incorrecto");
+            throw new Exception("DNI incorrecto");
         }
-        
-        return dniCliente;
+       
     }
     
     public void validarDni(int numeroDNI){
