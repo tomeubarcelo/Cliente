@@ -175,4 +175,19 @@ public class Cliente {
 
     }
     
+    public String pedirCorreo() throws Exception{
+        System.out.println ("Introduzca su correo electrónico:");
+        String correo = entradaEscaner.nextLine(); //Invocamos un método sobre un objeto Scanner
+        //http://puntocomnoesunlenguaje.blogspot.com/2013/07/ejemplos-expresiones-regulares-java-split.html
+        Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");   
+        Matcher mat = pat.matcher(correo);
+        if(mat.find()){
+            //System.out.println("Correo Válido");
+            return correo;
+        }else{
+            System.err.println ("Formato de correo electrónico incorrecto");
+            throw new Exception("Formato de correo electrónico incorrecto");
+        }
+    }
+    
 }

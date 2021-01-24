@@ -58,10 +58,14 @@ public class AplicacionClientes {
         String telefono = cliente1.pedirTelefono();
         cliente1.setTelefono(telefono);
         
+        String correo = cliente1.pedirCorreo();
+        cliente1.setCorreo(correo);
+        
         
         System.out.println("Nombre: "+cliente1.getNombre());
         System.out.println("NIF: "+cliente1.getNIF());
         System.out.println("Teléfono: "+cliente1.getTelefono());
+        System.out.println("Correo: "+cliente1.getCorreo());
 
         
         
