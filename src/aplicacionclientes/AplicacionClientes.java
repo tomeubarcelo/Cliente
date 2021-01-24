@@ -5,6 +5,10 @@
  */
 package aplicacionclientes;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -21,7 +25,7 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
         
-        //Cliente cliente1 = new Cliente("43218383A", "Tomeu", 680968942, "tomeu.95@gmail.com", "06-11-1995");
+        Cliente clienteTomeu = new Cliente("43218383A", "Tomeu", "680968942", "tomeu.95@gmail.com", "06-11-1995");
         
         /*System.out.println(cliente1.getNIF());
         System.out.println(cliente1.getNombre());
@@ -51,9 +55,11 @@ public class AplicacionClientes {
         */
         System.out.println("Cliente 1");
         Cliente cliente1 = new Cliente();
+        
         String nombre = cliente1.pedirNombre();
-        String nif = cliente1.pedirDni();
         cliente1.setNombre(nombre);
+        
+        String nif = cliente1.pedirDni();
         cliente1.setNIF(nif);
         
         String telefono = cliente1.pedirTelefono();
@@ -72,16 +78,24 @@ public class AplicacionClientes {
         System.out.println("Fecha nacimiento: "+cliente1.getFechaNacimiento());
         
         
+        FileOutputStream fichero = null;
+        
+        try{
+            fichero = new FileOutputStream("datos.txt");
+            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+            tuberia.writeObject(cliente1);     
+            fichero.close();
+        } catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        } catch(IOException ex){
+            ex.printStackTrace();
+        } 
+        
+      
         
         
         
-        
-        
-        
-        
-        
-        
-        
+        /*
         System.out.println("---------\nCliente 2");
         Cliente cliente2 = new Cliente();
         System.out.println(cliente2);
@@ -91,6 +105,7 @@ public class AplicacionClientes {
         
         Cliente cliente4 = new Cliente();
         System.out.println(cliente4);
+        */
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package aplicacionclientes;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
  *
  * @author tomeu
  */
-public class Cliente {
+public class Cliente implements Serializable {
 
     //atributos
     private String NIF;
