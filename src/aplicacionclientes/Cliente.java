@@ -18,7 +18,7 @@ public class Cliente {
     //atributos
     private String NIF;
     private String nombre;
-    private int telefono;
+    private String telefono;
     private String correo;
     private String fechaNacimiento;
     
@@ -26,7 +26,7 @@ public class Cliente {
     Scanner entradaEscaner = new Scanner (System.in); 
     
     //constructor con sus atributos
-    public Cliente(String NIF, String nombre, int telefono, String correo, String fechaNacimiento) {
+    public Cliente(String NIF, String nombre, String telefono, String correo, String fechaNacimiento) {
         this.NIF = NIF;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -56,11 +56,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -142,7 +142,7 @@ public class Cliente {
                 //para calcular la letra que deberia ser, cogeremos el caracter del array en la posicion del resto
                 //si la letra inroducida es igual que la letra que tocaria ser es correcto
                 if(letras[resto]==letraDni) {
-                    System.out.println("DNI CORRECTO");
+                    //System.out.println("DNI CORRECTO");
                     return dniCliente;
                 } else{
                     System.err.println ("La letra no coincide con sus digitos del DNI");
@@ -161,16 +161,18 @@ public class Cliente {
 
 
     }
-    
-    public void validarDni(int numeroDNI){
 
-        char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+    public String pedirTelefono() throws Exception {
         
-        int resto;
-        resto = numeroDNI % 23;
-        System.out.println("DNI COMPLETO: "+numeroDNI+letras[resto]);
+        System.out.println ("Introduzca su número de teléfono:");
+        String numTlf = entradaEscaner.nextLine(); //Invocamos un método sobre un objeto Scanner
+        if (numTlf.length() == 9) {
+            return numTlf;
+        } else {
+            System.err.println ("Número de teléfono incorrecto");
+            throw new Exception("Número de teléfono incorrecto");
+        }
 
     }
-    
     
 }

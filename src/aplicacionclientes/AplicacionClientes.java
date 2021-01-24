@@ -55,8 +55,13 @@ public class AplicacionClientes {
         cliente1.setNombre(nombre);
         cliente1.setNIF(nif);
         
+        String telefono = cliente1.pedirTelefono();
+        cliente1.setTelefono(telefono);
+        
+        
         System.out.println("Nombre: "+cliente1.getNombre());
         System.out.println("NIF: "+cliente1.getNIF());
+        System.out.println("Teléfono: "+cliente1.getTelefono());
 
         
         
