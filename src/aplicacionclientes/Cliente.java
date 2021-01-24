@@ -118,46 +118,48 @@ public class Cliente {
         String dniCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
 
         String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
+        
+        //array de caracteres que pueden ir con los digitos del dni
+        char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
 
-        // Lo siguiente devuelve true
-        //System.out.println(Pattern.matches(dniRegexp, dniCliente));
         try {
             if (Pattern.matches(dniRegexp, dniCliente)) {
-                System.out.println("dni correcto");
+                //System.out.println("dni con formato correcto");
+                //guardamos los digitos
+                String numDni = dniCliente.substring(0, 8);
+                //los pasamos a int
+                int numbers = Integer.parseInt(numDni);
+                //calculamos el resto del numero de dni entre 23
+                int resto = numbers%23;
+                /*
+                System.out.println(numbers);
+                System.out.println(resto);
+                System.out.println(letras[resto]);
+                */
+                //guardamos el caracter del dni
+                char letraDni = dniCliente.charAt(dniCliente.length() - 1);
+                //System.out.println(letraDni);
+                //para calcular la letra que deberia ser, cogeremos el caracter del array en la posicion del resto
+                //si la letra inroducida es igual que la letra que tocaria ser es correcto
+                if(letras[resto]==letraDni) {
+                    System.out.println("DNI CORRECTO");
+                    return dniCliente;
+                } else{
+                    System.err.println ("La letra no coincide con sus digitos del DNI");
+                    System.err.println ("Su DNI debería ser: "+numDni+"-"+letras[resto]);
+                    throw new Exception("La letra no coincide con sus digitos del DNI");
+                }
             } else {
-                System.err.println ("DNI incorrecto");
-                throw new Exception("DNI incorrecto");
+                //System.err.println("Length dini: "+dniCliente.length());
+                System.err.println ("Introduzca el formato correcto: 12345678A");
+                throw new Exception("Introduzca el formato correcto: 12345678A");
             }
         } catch (Exception e) {
             System.err.println ("DNI incorrecto");
             throw new Exception("DNI incorrecto");
         }
 
-        //array de caracteres que pueden ir con los digitos del dni
-        char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
-        
-        //guardamos los digitos
-        String numDni = dniCliente.substring(0, 8);
-        //los pasamos a int
-        int numbers = Integer.parseInt(numDni);
-        //calculamos el resto del numero de dni entre 23
-        int resto = numbers%23;
-        System.out.println(numbers);
-        System.out.println(resto);
-        System.out.println(letras[resto]);
-        //guardamos el caracter del dni
-        char letraDni = dniCliente.charAt(dniCliente.length() - 1);
-        System.out.println(letraDni);
-        //para calcular la letra que deberia ser, cogeremos el caracter del array en la posicion del resto
-        //si la letra inroducida es igual que la letra que tocaria ser es correcto
-        if(letras[resto]==letraDni) {
-            System.out.println("DNI CORRECTO");
-            return dniCliente;
-        } else{
-            System.err.println ("DNI incorrecto");
-            throw new Exception("DNI incorrecto");
-        }
-       
+
     }
     
     public void validarDni(int numeroDNI){
