@@ -6,6 +6,7 @@
 package aplicacionclientes;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -61,12 +62,14 @@ public class AplicacionClientes {
         String correo = cliente1.pedirCorreo();
         cliente1.setCorreo(correo);
         
+        String fechaNac = cliente1.pedirFechaNacimiento();
+        cliente1.setFechaNacimiento(fechaNac);
         
         System.out.println("Nombre: "+cliente1.getNombre());
         System.out.println("NIF: "+cliente1.getNIF());
         System.out.println("Teléfono: "+cliente1.getTelefono());
         System.out.println("Correo: "+cliente1.getCorreo());
-
+        System.out.println("Fecha nacimiento: "+cliente1.getFechaNacimiento());
         
         
         

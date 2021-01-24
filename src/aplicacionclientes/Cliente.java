@@ -5,6 +5,10 @@
  */
 package aplicacionclientes;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -190,4 +194,21 @@ public class Cliente {
         }
     }
     
+    public String pedirFechaNacimiento() throws ParseException, Exception {
+        System.out.println ("Introduzca su fecha de nacimiento con el siguiente formato 'DD/MM/YYYY' o 'DD-MM-YYYY':");
+        String fechaNacimiento = entradaEscaner.nextLine(); //Invocamos un método sobre un objeto Scanner
+        //DateFormat format = new SimpleDateFormat("DD/MM/YYYY"); // Creamos un formato de fecha
+        //Date fecha = format.parse(entrada); // Creamos un date con la entrada en el formato especificado
+        
+        Pattern pat = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
+        Matcher mat = pat.matcher(fechaNacimiento);
+        if(mat.find()){
+            //System.out.println(fechaNacimiento);
+            return fechaNacimiento;
+        }else{
+            System.err.println ("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
+            throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
+        }
+        
+    }
 }
