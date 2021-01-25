@@ -27,9 +27,7 @@ public class Cliente implements Serializable {
     private String correo;
     private String fechaNacimiento;
     
-    //Creación de un objeto Scanner
-    Scanner entradaEscaner = new Scanner (System.in); 
-    
+
     //constructor con sus atributos
     public Cliente(String NIF, String nombre, String telefono, String correo, String fechaNacimiento) {
         this.NIF = NIF;
@@ -39,9 +37,9 @@ public class Cliente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    Cliente() throws Exception {
-        this.NIF = NIF;
-        this.nombre = nombre;
+    public Cliente() throws Exception {
+        //constructor per defecte que crea objecte amb les dades a null
+        //introduirem les dades amb els setters 
     }
     
     //GETTERS Y SETTERS
@@ -54,9 +52,6 @@ public class Cliente implements Serializable {
     }
 
     public String getNombre() {
-        //metodo en el que se introduc el nombre del cliente
-        System.out.println ("Introduzca su nombre y apellidos:");
-        String nombre = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
         return nombre;
     }
 
@@ -89,7 +84,7 @@ public class Cliente implements Serializable {
     }
     //FIN GETTERS Y SETTERS
     
-    public String validaNombre (String nombreCliente) throws Exception{
+    public String validaNombre(String nombreCliente) throws Exception{
         //metodo en el que se introduc el nombre del cliente
         //System.out.println ("Introduzca su nombre y apellidos:");
         //String nombreCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
@@ -107,7 +102,7 @@ public class Cliente implements Serializable {
             System.err.println ("Solo debe contener letras");
             throw new Exception("Solo debe contener letras");
         } else { //devuelve el nombre correctamente
-            return nombreCliente;      
+            return nombre; // Valor válido: lo almacenamos
         }
     }
     
@@ -123,12 +118,8 @@ public class Cliente implements Serializable {
         return true;
     }
     
-    public String pedirDni() throws Exception{
+    public String validaDni(String dniCliente) throws Exception{
         Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
-       
-        System.out.println ("Introduzca su DNI con el formato 12345678A:");
-        String dniCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
-
         String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
         
         //array de caracteres que pueden ir con los digitos del dni
@@ -167,13 +158,12 @@ public class Cliente implements Serializable {
                 throw new Exception("Introduzca el formato correcto: 12345678A");
             }
         } catch (Exception e) {
-            System.err.println ("DNI incorrecto");
             throw new Exception("DNI incorrecto");
         }
 
 
     }
-
+/*
     public String pedirTelefono() throws Exception {
         
         System.out.println ("Introduzca su número de teléfono:");
@@ -218,5 +208,10 @@ public class Cliente implements Serializable {
             throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
         }
         
+    }
+    */
+    public void mostrarCliente(){
+        System.out.println("Nombre: "+nombre);
+        System.out.println("DNI: "+NIF);
     }
 }
