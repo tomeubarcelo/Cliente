@@ -10,7 +10,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +26,7 @@ public class Cliente implements Serializable {
     private String correo;
     private String fechaNacimiento;
     
-
+    
     //constructor con sus atributos
     public Cliente(String NIF, String nombre, String telefono, String correo, String fechaNacimiento) {
         this.NIF = NIF;
@@ -85,9 +84,6 @@ public class Cliente implements Serializable {
     //FIN GETTERS Y SETTERS
     
     public String validaNombre(String nombreCliente) throws Exception{
-        //metodo en el que se introduc el nombre del cliente
-        //System.out.println ("Introduzca su nombre y apellidos:");
-        //String nombreCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
         
         boolean contieneSoloLetras = contieneSoloLetras(nombreCliente);
         //con el metodo contieneSoloLetras(nombreCliente) comprobaremos si solo tiene letras
@@ -163,11 +159,9 @@ public class Cliente implements Serializable {
 
 
     }
-/*
-    public String pedirTelefono() throws Exception {
-        
-        System.out.println ("Introduzca su número de teléfono:");
-        String numTlf = entradaEscaner.nextLine(); //Invocamos un método sobre un objeto Scanner
+
+    public String validaTelefono(String numTlf) throws Exception {
+
         if (numTlf.length() == 9) {
             return numTlf;
         } else {
@@ -177,9 +171,8 @@ public class Cliente implements Serializable {
 
     }
     
-    public String pedirCorreo() throws Exception{
-        System.out.println ("Introduzca su correo electrónico:");
-        String correo = entradaEscaner.nextLine(); //Invocamos un método sobre un objeto Scanner
+    public String validaCorreo(String correo) throws Exception{
+
         //http://puntocomnoesunlenguaje.blogspot.com/2013/07/ejemplos-expresiones-regulares-java-split.html
         Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");   
         Matcher mat = pat.matcher(correo);
@@ -192,9 +185,8 @@ public class Cliente implements Serializable {
         }
     }
     
-    public String pedirFechaNacimiento() throws ParseException, Exception {
-        System.out.println ("Introduzca su fecha de nacimiento con el siguiente formato 'DD/MM/YYYY' o 'DD-MM-YYYY':");
-        String fechaNacimiento = entradaEscaner.nextLine(); //Invocamos un método sobre un objeto Scanner
+    public String validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {
+
         //DateFormat format = new SimpleDateFormat("DD/MM/YYYY"); // Creamos un formato de fecha
         //Date fecha = format.parse(entrada); // Creamos un date con la entrada en el formato especificado
         
@@ -207,11 +199,13 @@ public class Cliente implements Serializable {
             System.err.println ("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
             throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
         }
-        
     }
-    */
+    
     public void mostrarCliente(){
         System.out.println("Nombre: "+nombre);
         System.out.println("DNI: "+NIF);
+        System.out.println("Telefono: "+telefono);
+        System.out.println("Correo: "+correo);
+        System.out.println("Fecha nacimiento: "+fechaNacimiento);
     }
 }

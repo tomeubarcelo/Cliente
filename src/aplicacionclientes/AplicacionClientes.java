@@ -49,7 +49,29 @@ public class AplicacionClientes {
             System.out.println(e.getMessage());
         }
         
+        String tlfCliente = pideTelefono();
+        try {
+            cliente1.validaTelefono(tlfCliente);
+            cliente1.setTelefono(tlfCliente);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
+        String correoCliente = pideCorreo();
+        try {
+            cliente1.validaCorreo(correoCliente);
+            cliente1.setCorreo(correoCliente);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        String fechaNacCliente = pideFechaNacimiento();
+        try {
+            cliente1.validaFechaNacimiento(fechaNacCliente);
+            cliente1.setFechaNacimiento(fechaNacCliente);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         
         FileOutputStream fichero = null;
@@ -104,6 +126,27 @@ public class AplicacionClientes {
         System.out.println("Introduce tu DNI.");
         String dni = entradaScanner.nextLine();
         return dni;
+    }
+    
+    private static String pideTelefono(){
+        Scanner entradaScanner = new Scanner (System.in);
+        System.out.println("Introduce tu teléfono.");
+        String tlf = entradaScanner.nextLine();
+        return tlf;
+    }
+    
+    private static String pideCorreo(){
+        Scanner entradaScanner = new Scanner (System.in);
+        System.out.println("Introduce tu correo electronico.");
+        String correo = entradaScanner.nextLine();
+        return correo;
+    }
+    
+    private static String pideFechaNacimiento(){
+        Scanner entradaScanner = new Scanner (System.in);
+        System.out.println("Introduce tu fecha de nacimiento.");
+        String fechaNac = entradaScanner.nextLine();
+        return fechaNac;
     }
     
 }
