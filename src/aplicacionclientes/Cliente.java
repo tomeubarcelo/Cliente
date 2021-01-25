@@ -54,6 +54,9 @@ public class Cliente implements Serializable {
     }
 
     public String getNombre() {
+        //metodo en el que se introduc el nombre del cliente
+        System.out.println ("Introduzca su nombre y apellidos:");
+        String nombre = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
         return nombre;
     }
 
@@ -86,17 +89,21 @@ public class Cliente implements Serializable {
     }
     //FIN GETTERS Y SETTERS
     
-    public String pedirNombre () throws Exception{
+    public String validaNombre (String nombreCliente) throws Exception{
         //metodo en el que se introduc el nombre del cliente
-        System.out.println ("Introduzca su nombre y apellidos:");
-        String nombreCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
+        //System.out.println ("Introduzca su nombre y apellidos:");
+        //String nombreCliente = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
         
         boolean contieneSoloLetras = contieneSoloLetras(nombreCliente);
         //con el metodo contieneSoloLetras(nombreCliente) comprobaremos si solo tiene letras
         if (nombreCliente.length() > 40) { //si supera 40 caracteres -> error
             System.err.println ("Ha superado el límite de carácteres");
             throw new Exception("Ha superado el límite de carácteres");
-        } else if(contieneSoloLetras==false){ //si no contiene letras -> error
+        } else if (nombreCliente.length() < 2){
+            System.err.println ("No llega al mínimo de carácteres");
+            throw new Exception("No llega al mínimo de carácteres");
+        }
+        else if(contieneSoloLetras==false){ //si no contiene letras -> error
             System.err.println ("Solo debe contener letras");
             throw new Exception("Solo debe contener letras");
         } else { //devuelve el nombre correctamente

@@ -18,7 +18,7 @@ import java.util.Iterator;
  *
  * @author tomeu
  */
-public class AplicacionClientes implements Serializable {
+public class AplicacionClientes {
 
     /**
      * @param args the command line arguments
@@ -33,31 +33,16 @@ public class AplicacionClientes implements Serializable {
         System.out.println(cliente1.getTelefono());
         System.out.println(cliente1.getCorreo());
         System.out.println(cliente1.getFechaNacimiento());
-        
+
         cliente1.setNombre(cliente1.pedirNombre());
         System.out.println(cliente1.getNombre());*/
-        
-        /*ArrayList arrayClientes = new ArrayList();
 
-        for (int i=0; i < 5; i++) {
-            Cliente cliente2 = new Cliente();
-            arrayClientes.add( cliente2 );
-        }
-        Iterator it = arrayClientes.iterator();
-        while ( it.hasNext() ) {
-        Object objeto = it.next();
-        Cliente producto = (Cliente)objeto;
-        System.out.println(producto);
-        }
-        for (int i=0; i < arrayClientes.size(); i++) {
-            System.out.println(i+" - "+arrayClientes.get(i));
-        }
-        System.out.println(arrayClientes.size());
-        */
         System.out.println("Cliente 1");
         Cliente cliente1 = new Cliente();
         
-        String nombre = cliente1.pedirNombre();
+        //nombre
+        String nombre =  cliente1.getNombre();
+        cliente1.validaNombre(nombre);
         cliente1.setNombre(nombre);
         
         String nif = cliente1.pedirDni();
