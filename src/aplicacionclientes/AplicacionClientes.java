@@ -5,21 +5,22 @@
  */
 package aplicacionclientes;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Scanner;
 
 /**
  *
  * @author tomeu
  */
-public class AplicacionClientes implements Serializable {
+public class AplicacionClientes {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
@@ -28,18 +29,20 @@ public class AplicacionClientes implements Serializable {
         
         
         
-        Scanner input = new Scanner(System.in);
+        //Scanner input = new Scanner(System.in);
 
 
 
-  
-        String vector[] = new String[5];
+  /*
+        String vector[] = new String[1];
 
-        for (int i = 0; i < vector.length; i++) {
+        for (int i = 0; i < vector.length; i++) {*/
             /*System.out.print("Id " + i + "\nDigite el nombre: ");
             nombre = input.next();
             edad = input.nextInt();
             vector[i] = nombre+" "+edad;*/
+            
+            /*
             System.out.println("Cliente "+i);
             Cliente cliente1 = new Cliente();
 
@@ -92,8 +95,67 @@ public class AplicacionClientes implements Serializable {
                 
                 
             }
-        
- 
+           */     
+            FileOutputStream fichero = null;
+
+                try{
+                    fichero = new FileOutputStream("datos2.txt");
+                    ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+                    tuberia.writeObject(clienteTomeu);     
+                } catch(FileNotFoundException ex){
+                    ex.printStackTrace();
+                } catch(IOException ex){
+                    ex.printStackTrace();
+                } finally{
+                    try{
+                       fichero.close();   
+                    } catch(IOException ex){
+                       ex.printStackTrace();
+                    }
+                }
+                
+                
+                //leer
+                FileInputStream ficheroEntrada=null;
+                Cliente c;
+                try{
+                    ficheroEntrada = new FileInputStream("datos2.txt");
+                    ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
+                    c =(Cliente)tuberiaEntrada.readObject();  
+                    c.mostrarCliente();
+                } catch(FileNotFoundException ex){
+                    ex.printStackTrace();
+                } catch(IOException ex){
+                    ex.printStackTrace();
+                } catch(ClassNotFoundException ex){
+                    ex.printStackTrace();
+                }
+        /*FileOutputStream fichero = null;
+        try{
+        fichero = new FileOutputStream("datos.txt");
+        ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+        tuberia.writeObject(cliente1);
+        } catch(FileNotFoundException ex){
+        ex.printStackTrace();
+        } catch(IOException ex){
+        ex.printStackTrace();
+        } finally{
+        try{
+        fichero.close();
+        } catch(IOException ex){
+        ex.printStackTrace();
+        }
+        }
+         */
+        /*
+        System.out.println("---------\nCliente 2");
+        Cliente cliente2 = new Cliente();
+        System.out.println(cliente2);
+        Cliente cliente3 = new Cliente();
+        System.out.println(cliente3);
+        Cliente cliente4 = new Cliente();
+        System.out.println(cliente4);
+         */ 
         
             /*FileOutputStream fichero = null;
 

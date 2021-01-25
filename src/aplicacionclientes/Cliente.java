@@ -6,10 +6,7 @@
 package aplicacionclientes;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -211,5 +208,14 @@ public class Cliente implements Serializable {
             throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
         }
         
+    }
+    
+    
+    public void mostrarCliente(){
+        System.out.println("Nombre: "+nombre);
+        System.out.println("NIF: "+NIF);
+        System.out.println("Correo: "+correo);
+        System.out.println("Tlf: "+telefono);
+        System.out.println("Fecha nacimiento: "+fechaNacimiento);
     }
 }
