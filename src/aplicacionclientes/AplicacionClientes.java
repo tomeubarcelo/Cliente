@@ -69,32 +69,65 @@ public class AplicacionClientes {
         
         
         //TELEFONO CLIENTE
-        String tlfCliente = pideTelefono();
-        try {
-            cliente1.validaTelefono(tlfCliente);
-            cliente1.setTelefono(tlfCliente);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
+        do {  
+            sal = false;
+            String tlfCliente = pideTelefono();
+            try {
+                cliente1.validaTelefono(tlfCliente);
+
+                //System.out.println(cliente1.validaDni(dniCliente));
+                boolean formatoCorrecto = cliente1.validaTelefono(tlfCliente);
+                if (formatoCorrecto) {
+                    cliente1.setTelefono(tlfCliente);
+                    sal = true;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!sal);
+                  
         //CORREO CLIENTE
-        String correoCliente = pideCorreo();
-        try {
-            cliente1.validaCorreo(correoCliente);
-            cliente1.setCorreo(correoCliente);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        do {  
+            sal = false;
+            String correoCliente = pideCorreo();
+            try {
+                cliente1.validaCorreo(correoCliente);
+                //System.out.println(cliente1.validaDni(dniCliente));
+                boolean formatoCorrecto = cliente1.validaCorreo(correoCliente);
+                if (formatoCorrecto) {
+                    cliente1.setCorreo(correoCliente);
+                    sal = true;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!sal);
+        
+
         
         //FECHA NACIMIENTO CLIENTE
-        String fechaNacCliente = pideFechaNacimiento();
-        try {
-            cliente1.validaFechaNacimiento(fechaNacCliente);
-            cliente1.setFechaNacimiento(fechaNacCliente);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        do {  
+            sal = false;
+            String fechaNacCliente = pideFechaNacimiento();
+            try {
+                cliente1.validaFechaNacimiento(fechaNacCliente);
+                //System.out.println(cliente1.validaDni(dniCliente));
+                boolean formatoCorrecto = cliente1.validaFechaNacimiento(fechaNacCliente);
+                if (formatoCorrecto) {
+                    cliente1.setFechaNacimiento(fechaNacCliente);
+                    sal = true;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!sal);
         
+        
+        
+        
+        
+        
+        //FICHEROS
         
         FileOutputStream fichero = null;
         

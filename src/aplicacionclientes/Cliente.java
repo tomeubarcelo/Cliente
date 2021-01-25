@@ -157,10 +157,11 @@ public class Cliente implements Serializable {
 
     }
 
-    public String validaTelefono(String numTlf) throws Exception {
+    public boolean validaTelefono(String numTlf) throws Exception {
 
         if (numTlf.length() == 9) {
-            return numTlf;
+            //return numTlf;
+            return true;
         } else {
             System.err.println ("Número de teléfono incorrecto");
             throw new Exception("Número de teléfono incorrecto");
@@ -168,21 +169,21 @@ public class Cliente implements Serializable {
 
     }
     
-    public String validaCorreo(String correo) throws Exception{
+    public boolean validaCorreo(String correo) throws Exception{
 
         //http://puntocomnoesunlenguaje.blogspot.com/2013/07/ejemplos-expresiones-regulares-java-split.html
         Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");   
         Matcher mat = pat.matcher(correo);
         if(mat.find()){
             //System.out.println("Correo Válido");
-            return correo;
+            return true;
         }else{
             System.err.println ("Formato de correo electrónico incorrecto");
             throw new Exception("Formato de correo electrónico incorrecto");
         }
     }
     
-    public String validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {
+    public boolean validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {
 
         //DateFormat format = new SimpleDateFormat("DD/MM/YYYY"); // Creamos un formato de fecha
         //Date fecha = format.parse(entrada); // Creamos un date con la entrada en el formato especificado
@@ -191,7 +192,7 @@ public class Cliente implements Serializable {
         Matcher mat = pat.matcher(fechaNacimiento);
         if(mat.find()){
             //System.out.println(fechaNacimiento);
-            return fechaNacimiento;
+            return true;
         }else{
             System.err.println ("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
             throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
