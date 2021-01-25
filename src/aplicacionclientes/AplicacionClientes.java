@@ -31,142 +31,205 @@ public class AplicacionClientes {
 
         
         Cliente cliente1 = new Cliente ();
-        System.out.println("Cliente 1");
-        boolean sal = false;
-        
-        //NOMBRE CLIENTE
-        do {   
-        String nombreCliente = pideNombre();
-            try {
-                cliente1.validaNombre(nombreCliente);    
-                boolean formatoCorrecto = cliente1.validaNombre(nombreCliente);
-                if (formatoCorrecto) {
-                    cliente1.setNombre(nombreCliente);
-                    sal = true;
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!sal);
-        
-        //DNI CLIENTE
-        do {  
-        sal = false;
-        String dniCliente = pideDni();
-            try {
-                cliente1.validaDni(dniCliente);
-                //System.out.println(cliente1.validaDni(dniCliente));
-                boolean formatoCorrecto = cliente1.validaDni(dniCliente);
-                if (formatoCorrecto) {
-                    cliente1.setNIF(dniCliente);
-                    sal = true;
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!sal);
-        
-        
-        
-        //TELEFONO CLIENTE
-        do {  
-            sal = false;
-            String tlfCliente = pideTelefono();
-            try {
-                cliente1.validaTelefono(tlfCliente);
+        byte opcio;
+        do { 
+            opcio = menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
+            switch (opcio) {
+                case 1: 
 
-                //System.out.println(cliente1.validaDni(dniCliente));
-                boolean formatoCorrecto = cliente1.validaTelefono(tlfCliente);
-                if (formatoCorrecto) {
-                    cliente1.setTelefono(tlfCliente);
-                    sal = true;
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!sal);
-                  
-        //CORREO CLIENTE
-        do {  
-            sal = false;
-            String correoCliente = pideCorreo();
-            try {
-                cliente1.validaCorreo(correoCliente);
-                //System.out.println(cliente1.validaDni(dniCliente));
-                boolean formatoCorrecto = cliente1.validaCorreo(correoCliente);
-                if (formatoCorrecto) {
-                    cliente1.setCorreo(correoCliente);
-                    sal = true;
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!sal);
+                    System.out.println("Cliente 1");
+                    boolean sal = false;
+
+                    //NOMBRE CLIENTE
+                    do {   
+                    String nombreCliente = pideNombre();
+                        try {
+                            cliente1.validaNombre(nombreCliente);    
+                            boolean formatoCorrecto = cliente1.validaNombre(nombreCliente);
+                            if (formatoCorrecto) {
+                                cliente1.setNombre(nombreCliente);
+                                sal = true;
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } while (!sal);
+
+                    //DNI CLIENTE
+                    do {  
+                    sal = false;
+                    String dniCliente = pideDni();
+                        try {
+                            cliente1.validaDni(dniCliente);
+                            //System.out.println(cliente1.validaDni(dniCliente));
+                            boolean formatoCorrecto = cliente1.validaDni(dniCliente);
+                            if (formatoCorrecto) {
+                                cliente1.setNIF(dniCliente);
+                                sal = true;
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } while (!sal);
+
+
+
+                    //TELEFONO CLIENTE
+                    do {  
+                        sal = false;
+                        String tlfCliente = pideTelefono();
+                        try {
+                            cliente1.validaTelefono(tlfCliente);
+
+                            //System.out.println(cliente1.validaDni(dniCliente));
+                            boolean formatoCorrecto = cliente1.validaTelefono(tlfCliente);
+                            if (formatoCorrecto) {
+                                cliente1.setTelefono(tlfCliente);
+                                sal = true;
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } while (!sal);
+
+                    //CORREO CLIENTE
+                    do {  
+                        sal = false;
+                        String correoCliente = pideCorreo();
+                        try {
+                            cliente1.validaCorreo(correoCliente);
+                            //System.out.println(cliente1.validaDni(dniCliente));
+                            boolean formatoCorrecto = cliente1.validaCorreo(correoCliente);
+                            if (formatoCorrecto) {
+                                cliente1.setCorreo(correoCliente);
+                                sal = true;
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } while (!sal);
+
+
+
+                    //FECHA NACIMIENTO CLIENTE
+                    do {  
+                        sal = false;
+                        String fechaNacCliente = pideFechaNacimiento();
+                        try {
+                            cliente1.validaFechaNacimiento(fechaNacCliente);
+                            //System.out.println(cliente1.validaDni(dniCliente));
+                            boolean formatoCorrecto = cliente1.validaFechaNacimiento(fechaNacCliente);
+                            if (formatoCorrecto) {
+                                cliente1.setFechaNacimiento(fechaNacCliente);
+                                sal = true;
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } while (!sal);
+
+
+
+
+
+
+                    //FICHEROS
+
+                    FileOutputStream fichero = null;
+
+                    try{
+                        fichero = new FileOutputStream("datos.txt");
+                        ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+                        tuberia.writeObject(cliente1);
+
+                    } catch(FileNotFoundException ex){
+                        ex.printStackTrace();
+                    } catch(IOException ex){
+                        ex.printStackTrace();
+                    } finally{
+                        try{
+                           fichero.close();   
+                        } catch(IOException ex){
+                            ex.printStackTrace();
+                        }
+                    }
+
+
+
+                    
+                    
+                    
+                    
+                    
+                    break;
+                case 2: 
+                    System.out.println("2");
+                    
+                    //leer objecto DEL FICHERO
+        
+                    FileInputStream ficheroEntrada = null;
+                    Cliente c;
+
+                    try{
+                        ficheroEntrada = new FileInputStream("datos.txt");
+                        ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
+                        c = (Cliente)tuberiaEntrada.readObject();
+                        c.mostrarCliente();
+                    } catch(FileNotFoundException ex){
+                        ex.printStackTrace();
+                    } catch(IOException ex){
+                        ex.printStackTrace();
+                    } catch(ClassNotFoundException ex){
+                        ex.printStackTrace();
+                    } 
+                    break;
+                case 3: 
+                    System.out.println("3");
+                    break;
+                case 4:
+                    System.out.println("4");
+                    break;
+                case 5:
+                    System.out.println("5");
+                    break;
+                case 6:
+                    System.out.println("6");
+                    break;
+                default: 
+                    System.out.println("Final de programa");
+            } 
+        } while (opcio==1 || opcio == 2 || opcio==3 || opcio == 4);
+
+    
+        
         
 
-        
-        //FECHA NACIMIENTO CLIENTE
-        do {  
-            sal = false;
-            String fechaNacCliente = pideFechaNacimiento();
-            try {
-                cliente1.validaFechaNacimiento(fechaNacCliente);
-                //System.out.println(cliente1.validaDni(dniCliente));
-                boolean formatoCorrecto = cliente1.validaFechaNacimiento(fechaNacCliente);
-                if (formatoCorrecto) {
-                    cliente1.setFechaNacimiento(fechaNacCliente);
-                    sal = true;
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!sal);
-        
-        
-        
-        
-        
-        
-        //FICHEROS
-        
-        FileOutputStream fichero = null;
-        
-        try{
-            fichero = new FileOutputStream("datos.txt");
-            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-            tuberia.writeObject(cliente1);
-            
-        } catch(FileNotFoundException ex){
-            ex.printStackTrace();
-        } catch(IOException ex){
-            ex.printStackTrace();
-        } finally{
+    }
+    
+    private static byte menuOpcions() {
+        byte opcio=0;
+        do{
             try{
-               fichero.close();   
-            } catch(IOException ex){
-                ex.printStackTrace();
+                Scanner op = new Scanner (System.in);
+            //menú d'opcions del programa
+                System.out.println("1. Crear fichero clientes. ");
+                System.out.println("2. Listar clientes. ");
+                System.out.println("3. Buscar un cliente. ");
+                System.out.println("4. Felicitar clientes. "); 
+                System.out.println("5. Borrar fichero de clientes.");
+                System.out.println("6. Salir.");
+                System.out.print("Introdueix l'opcio elegida: ");
+                opcio=op.nextByte();
+                if (opcio < 1 || opcio > 6) {
+                System.out.println("Escollir entre (1..6)!.");    
+                }
+            }    
+            catch(Exception e){
+                System.out.println("Error al llegir del teclat(1..6)!.");
             }
-        }
- 
-        
-        
-        //leer objecto DEL FICHERO
-        
-        FileInputStream ficheroEntrada = null;
-        Cliente c;
-        
-        try{
-            ficheroEntrada = new FileInputStream("datos.txt");
-            ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
-            c = (Cliente)tuberiaEntrada.readObject();
-            c.mostrarCliente();
-        } catch(FileNotFoundException ex){
-            ex.printStackTrace();
-        } catch(IOException ex){
-            ex.printStackTrace();
-        } catch(ClassNotFoundException ex){
-            ex.printStackTrace();
-        } 
+            
+        }while (opcio < 1 || opcio > 6);
+        return opcio;
     }
     
     private static String pideNombre() {
