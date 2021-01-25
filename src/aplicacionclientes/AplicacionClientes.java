@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -17,7 +18,7 @@ import java.util.Iterator;
  *
  * @author tomeu
  */
-public class AplicacionClientes {
+public class AplicacionClientes implements Serializable {
 
     /**
      * @param args the command line arguments
@@ -84,12 +85,17 @@ public class AplicacionClientes {
             fichero = new FileOutputStream("datos.txt");
             ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
             tuberia.writeObject(cliente1);     
-            fichero.close();
         } catch(FileNotFoundException ex){
             ex.printStackTrace();
         } catch(IOException ex){
             ex.printStackTrace();
-        } 
+        } finally{
+            try{
+               fichero.close();   
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+        }
         
       
         
