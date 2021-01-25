@@ -6,10 +6,7 @@
 package aplicacionclientes;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +23,7 @@ public class Cliente implements Serializable {
     private String correo;
     private String fechaNacimiento;
     
-    
+
     //constructor con sus atributos
     public Cliente(String NIF, String nombre, String telefono, String correo, String fechaNacimiento) {
         this.NIF = NIF;
@@ -83,23 +80,23 @@ public class Cliente implements Serializable {
     }
     //FIN GETTERS Y SETTERS
     
-    public String validaNombre(String nombreCliente) throws Exception{
+    public boolean validaNombre(String nombreCliente) throws Exception{
         
         boolean contieneSoloLetras = contieneSoloLetras(nombreCliente);
         //con el metodo contieneSoloLetras(nombreCliente) comprobaremos si solo tiene letras
-        if (nombreCliente.length() > 40) { //si supera 40 caracteres -> error
-            System.err.println ("Ha superado el límite de carácteres");
-            throw new Exception("Ha superado el límite de carácteres");
-        } else if (nombreCliente.length() < 2){
-            System.err.println ("No llega al mínimo de carácteres");
-            throw new Exception("No llega al mínimo de carácteres");
-        }
-        else if(contieneSoloLetras==false){ //si no contiene letras -> error
-            System.err.println ("Solo debe contener letras");
-            throw new Exception("Solo debe contener letras");
-        } else { //devuelve el nombre correctamente
-            return nombre; // Valor válido: lo almacenamos
-        }
+            if (nombreCliente.length() > 40) { //si supera 40 caracteres -> error
+                //System.err.println ("Ha superado el límite de carácteres");
+                throw new Exception("Ha superado el límite de carácteres");
+            } else if (nombreCliente.length() < 2){
+                //System.err.println ("No llega al mínimo de carácteres");
+                throw new Exception("No llega al mínimo de carácteres");
+            }
+            else if(contieneSoloLetras==false){ //si no contiene letras -> error
+                //System.err.println ("Solo debe contener letras");
+                throw new Exception("Solo debe contener letras");
+            } else { //devuelve el nombre correctamente
+                return true; // Valor válido: lo almacenamos
+            }
     }
     
     public static boolean contieneSoloLetras(String cadena) {
@@ -114,7 +111,7 @@ public class Cliente implements Serializable {
         return true;
     }
     
-    public String validaDni(String dniCliente) throws Exception{
+    public boolean validaDni(String dniCliente) throws Exception{
         Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
         String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
         
@@ -142,7 +139,7 @@ public class Cliente implements Serializable {
                 //si la letra inroducida es igual que la letra que tocaria ser es correcto
                 if(letras[resto]==letraDni) {
                     //System.out.println("DNI CORRECTO");
-                    return dniCliente;
+                    return true;
                 } else{
                     System.err.println ("La letra no coincide con sus digitos del DNI");
                     System.err.println ("Su DNI debería ser: "+numDni+"-"+letras[resto]);

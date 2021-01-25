@@ -29,26 +29,46 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
 
-        //nombre
+        
         Cliente cliente1 = new Cliente ();
         System.out.println("Cliente 1");
+        boolean sal = false;
         
+        //NOMBRE CLIENTE
+        do {   
         String nombreCliente = pideNombre();
-        try {
-            cliente1.validaNombre(nombreCliente);
-            cliente1.setNombre(nombreCliente);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+            try {
+                cliente1.validaNombre(nombreCliente);    
+                boolean formatoCorrecto = cliente1.validaNombre(nombreCliente);
+                if (formatoCorrecto) {
+                    cliente1.setNombre(nombreCliente);
+                    sal = true;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!sal);
         
+        //DNI CLIENTE
+        do {  
+        sal = false;
         String dniCliente = pideDni();
-        try {
-            cliente1.validaDni(dniCliente);
-            cliente1.setNIF(dniCliente);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+            try {
+                cliente1.validaDni(dniCliente);
+                //System.out.println(cliente1.validaDni(dniCliente));
+                boolean formatoCorrecto = cliente1.validaDni(dniCliente);
+                if (formatoCorrecto) {
+                    cliente1.setNIF(dniCliente);
+                    sal = true;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!sal);
         
+        
+        
+        //TELEFONO CLIENTE
         String tlfCliente = pideTelefono();
         try {
             cliente1.validaTelefono(tlfCliente);
@@ -57,6 +77,7 @@ public class AplicacionClientes {
             System.out.println(e.getMessage());
         }
         
+        //CORREO CLIENTE
         String correoCliente = pideCorreo();
         try {
             cliente1.validaCorreo(correoCliente);
@@ -65,6 +86,7 @@ public class AplicacionClientes {
             System.out.println(e.getMessage());
         }
         
+        //FECHA NACIMIENTO CLIENTE
         String fechaNacCliente = pideFechaNacimiento();
         try {
             cliente1.validaFechaNacimiento(fechaNacCliente);
