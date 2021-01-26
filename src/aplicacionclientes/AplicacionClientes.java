@@ -41,94 +41,35 @@ public class AplicacionClientes {
             switch (opcio) {
                 case 1: 
 
-                    System.out.println("Cliente 1");
-                    boolean sal = false;
                     
-                    // comprobamos que existe el fichero para cargar los datos si es que existe
+                    //comprobamos que existe el fichero para cargar los datos si es que existe
                     if (fich.exists()){
                         System.err.println("Ya existe el fichero");
                         throw new Exception("Ya existe el fichero");
                     }
                     //FIN COMPROBAR
                     
+                    
+                    System.out.println("Cliente 1");
+                    boolean sal = false;
+                    
+                    
                     //NOMBRE CLIENTE
                     nombre(solicitud, cliente1, sal);
                     
                     //DNI CLIENTE
-                    do {  
-                    sal = false;
-                    String dniCliente = solicitud.pideDni();
-                        try {
-                            cliente1.validaDni(dniCliente);
-                            //System.out.println(cliente1.validaDni(dniCliente));
-                            boolean formatoCorrecto = cliente1.validaDni(dniCliente);
-                            if (formatoCorrecto) {
-                                cliente1.setNIF(dniCliente);
-                                sal = true;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } while (!sal);
-
-
+                    dni(solicitud, cliente1, sal);
 
                     //TELEFONO CLIENTE
-                    do {  
-                        sal = false;
-                        String tlfCliente = solicitud.pideTelefono();
-                        try {
-                            cliente1.validaTelefono(tlfCliente);
-
-                            //System.out.println(cliente1.validaDni(dniCliente));
-                            boolean formatoCorrecto = cliente1.validaTelefono(tlfCliente);
-                            if (formatoCorrecto) {
-                                cliente1.setTelefono(tlfCliente);
-                                sal = true;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } while (!sal);
+                    telefono(solicitud, cliente1, sal);
 
                     //CORREO CLIENTE
-                    do {  
-                        sal = false;
-                        String correoCliente = solicitud.pideCorreo();
-                        try {
-                            cliente1.validaCorreo(correoCliente);
-                            //System.out.println(cliente1.validaDni(dniCliente));
-                            boolean formatoCorrecto = cliente1.validaCorreo(correoCliente);
-                            if (formatoCorrecto) {
-                                cliente1.setCorreo(correoCliente);
-                                sal = true;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } while (!sal);
-
-
+                    correo(solicitud, cliente1, sal);
 
                     //FECHA NACIMIENTO CLIENTE
-                    do {  
-                        sal = false;
-                        String fechaNacCliente = solicitud.pideFechaNacimiento();
-                        try {
-                            cliente1.validaFechaNacimiento(fechaNacCliente);
-                            //System.out.println(cliente1.validaDni(dniCliente));
-                            boolean formatoCorrecto = cliente1.validaFechaNacimiento(fechaNacCliente);
-                            if (formatoCorrecto) {
-                                cliente1.setFechaNacimiento(fechaNacCliente);
-                                sal = true;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } while (!sal);
+                    fechaNacimiento(solicitud, cliente1, sal);
 
                     //FICHEROS
-
                     FileOutputStream fichero = null;
 
                     try{
@@ -217,6 +158,79 @@ public class AplicacionClientes {
             } while (!sal);
     }
     
+    public static void dni(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
+            do {  
+                sal = false;
+                String dniCliente = solicitud.pideDni();
+                    try {
+                        cliente.validaDni(dniCliente);
+                        //System.out.println(cliente1.validaDni(dniCliente));
+                        boolean formatoCorrecto = cliente.validaDni(dniCliente);
+                        if (formatoCorrecto) {
+                            cliente.setNIF(dniCliente);
+                            sal = true;
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                } while (!sal);
+    }
     
+    public static void telefono (FuncionamientoApp solicitud, Cliente cliente, boolean sal){
+            do {  
+                sal = false;
+                String tlfCliente = solicitud.pideTelefono();
+                try {
+                    cliente.validaTelefono(tlfCliente);
+
+                    //System.out.println(cliente1.validaDni(dniCliente));
+                    boolean formatoCorrecto = cliente.validaTelefono(tlfCliente);
+                    if (formatoCorrecto) {
+                        cliente.setTelefono(tlfCliente);
+                        sal = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!sal);
+    }
+    
+    
+    public static void correo(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
+            do {  
+                sal = false;
+                String correoCliente = solicitud.pideCorreo();
+                try {
+                    cliente.validaCorreo(correoCliente);
+                    //System.out.println(cliente1.validaDni(dniCliente));
+                    boolean formatoCorrecto = cliente.validaCorreo(correoCliente);
+                    if (formatoCorrecto) {
+                        cliente.setCorreo(correoCliente);
+                        sal = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!sal);
+    }
+    
+    
+    public static void fechaNacimiento(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
+            do {  
+                sal = false;
+                String fechaNacCliente = solicitud.pideFechaNacimiento();
+                try {
+                    cliente.validaFechaNacimiento(fechaNacCliente);
+                    //System.out.println(cliente1.validaDni(dniCliente));
+                    boolean formatoCorrecto = cliente.validaFechaNacimiento(fechaNacCliente);
+                    if (formatoCorrecto) {
+                        cliente.setFechaNacimiento(fechaNacCliente);
+                        sal = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!sal);
+    }
     
 }
