@@ -52,20 +52,8 @@ public class AplicacionClientes {
                     //FIN COMPROBAR
                     
                     //NOMBRE CLIENTE
-                    do {   
-                    String nombreCliente = solicitud.pideNombre();
-                        try {
-                            cliente1.validaNombre(nombreCliente);    
-                            boolean formatoCorrecto = cliente1.validaNombre(nombreCliente);
-                            if (formatoCorrecto) {
-                                cliente1.setNombre(nombreCliente);
-                                sal = true;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } while (!sal);
-
+                    nombre(solicitud, cliente1, sal);
+                    
                     //DNI CLIENTE
                     do {  
                     sal = false;
@@ -213,5 +201,22 @@ public class AplicacionClientes {
 
     }
 
+    public static void nombre(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
+        do {   
+            String nombreCliente = solicitud.pideNombre();
+                try {
+                    cliente.validaNombre(nombreCliente);    
+                    boolean formatoCorrecto = cliente.validaNombre(nombreCliente);
+                    if (formatoCorrecto) {
+                        cliente.setNombre(nombreCliente);
+                        sal = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!sal);
+    }
+    
+    
     
 }
