@@ -28,6 +28,7 @@ public class AplicacionClientes {
         // TODO code application logic here
 
         final String PATH = "clientes.txt";
+        File fich = new File(PATH);
         
         Cliente cliente1 = new Cliente ();
         
@@ -44,7 +45,6 @@ public class AplicacionClientes {
                     boolean sal = false;
                     
                     // comprobamos que existe el fichero para cargar los datos si es que existe
-                    File fich = new File(PATH);
                     if (fich.exists()){
                         System.err.println("Ya existe el fichero");
                         throw new Exception("Ya existe el fichero");
@@ -158,15 +158,7 @@ public class AplicacionClientes {
                         } catch(IOException ex){
                             ex.printStackTrace();
                         }
-                    }
-
-
-
-                    
-                    
-                    
-                    
-                    
+                    }                    
                     break;
 
 
@@ -199,6 +191,13 @@ public class AplicacionClientes {
                     break;
                 case 5:
                     System.out.println("5");
+                    if (!(fich.exists())){
+                        System.err.println("No existe el fichero");
+                        //throw new Exception("No existe el fichero");
+                    } else {
+                        File ficheroParaBorrar = new File(PATH);
+                        ficheroParaBorrar.delete();
+                    }
                     break;
                 case 6:
                     System.out.println("6");
