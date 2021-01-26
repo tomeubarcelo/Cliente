@@ -52,7 +52,7 @@ public class AplicacionClientes {
                     
                     Cliente array[] = new Cliente[2];
                     
-                    for (int i = 0; i <= array.length; i++) {
+                    for (int i = 0; i < array.length; i++) {
                         // Tenemos un array de 5 elementos.
 
                         
