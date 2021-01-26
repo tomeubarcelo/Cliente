@@ -30,7 +30,7 @@ public class AplicacionClientes {
         final String PATH = "clientes.txt";
         File fich = new File(PATH);
         
-        Cliente cliente1 = new Cliente ();
+        
         
         // instanciamos la clase de solicitudes por teclado
         FuncionamientoApp solicitud = new FuncionamientoApp();
@@ -50,44 +50,52 @@ public class AplicacionClientes {
                     //FIN COMPROBAR
                     
                     
-                    System.out.println("Cliente 1");
-                    boolean sal = false;
+                    Cliente array[] = new Cliente[2];
                     
-                    
-                    //NOMBRE CLIENTE
-                    nombre(solicitud, cliente1, sal);
-                    
-                    //DNI CLIENTE
-                    dni(solicitud, cliente1, sal);
+                    for (int i = 0; i <= array.length; i++) {
+                        // Tenemos un array de 5 elementos.
 
-                    //TELEFONO CLIENTE
-                    telefono(solicitud, cliente1, sal);
+                        
+                        array[i] = new Cliente();
+                        System.out.println("Cliente "+i);
+                        boolean sal = false;
 
-                    //CORREO CLIENTE
-                    correo(solicitud, cliente1, sal);
 
-                    //FECHA NACIMIENTO CLIENTE
-                    fechaNacimiento(solicitud, cliente1, sal);
+                        //NOMBRE CLIENTE
+                        nombre(solicitud, array[i], sal);
 
-                    //FICHEROS
-                    FileOutputStream fichero = null;
+                        //DNI CLIENTE
+                        dni(solicitud, array[i], sal);
 
-                    try{
-                        fichero = new FileOutputStream(PATH);
-                        ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-                        tuberia.writeObject(cliente1);
+                        //TELEFONO CLIENTE
+                        telefono(solicitud, array[i], sal);
 
-                    } catch(FileNotFoundException ex){
-                        ex.printStackTrace();
-                    } catch(IOException ex){
-                        ex.printStackTrace();
-                    } finally{
+                        //CORREO CLIENTE
+                        correo(solicitud, array[i], sal);
+
+                        //FECHA NACIMIENTO CLIENTE
+                        fechaNacimiento(solicitud, array[i], sal);
+
+                        //FICHEROS
+                        FileOutputStream fichero = null;
+
                         try{
-                           fichero.close();   
+                            fichero = new FileOutputStream(PATH);
+                            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+                            tuberia.writeObject(array[i]);
+
+                        } catch(FileNotFoundException ex){
+                            ex.printStackTrace();
                         } catch(IOException ex){
                             ex.printStackTrace();
-                        }
-                    }                    
+                        } finally{
+                            try{
+                               fichero.close();   
+                            } catch(IOException ex){
+                                ex.printStackTrace();
+                            }
+                        }            
+                    }
                     break;
 
 
