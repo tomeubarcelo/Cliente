@@ -5,12 +5,14 @@
  */
 package aplicacionclientes;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -25,8 +27,9 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
 
-        
+        final String PATH = "clientes.txt";
         Cliente cliente1 = new Cliente ();
+          ArrayList listaDeObjetosCliente = new ArrayList();
         byte opcio;
         do { 
             opcio = menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
@@ -35,7 +38,15 @@ public class AplicacionClientes {
 
                     System.out.println("Cliente 1");
                     boolean sal = false;
-
+                    
+                    // comprobamos que existe el fichero para cargar los datos si es que existe
+                    File fich = new File(PATH);
+                    if (fich.exists()){
+                        System.err.println("Ya existe el fichero");
+                        throw new Exception("Ya existe el fichero");
+                    }
+                    //FIN COMPROBAR
+                    
                     //NOMBRE CLIENTE
                     do {   
                     String nombreCliente = pideNombre();
@@ -129,7 +140,7 @@ public class AplicacionClientes {
                     FileOutputStream fichero = null;
 
                     try{
-                        fichero = new FileOutputStream("datos.txt");
+                        fichero = new FileOutputStream(PATH);
                         ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
                         tuberia.writeObject(cliente1);
 
@@ -153,6 +164,8 @@ public class AplicacionClientes {
                     
                     
                     break;
+
+
                 case 2: 
                     System.out.println("2");
                     
@@ -162,7 +175,7 @@ public class AplicacionClientes {
                     Cliente c;
 
                     try{
-                        ficheroEntrada = new FileInputStream("datos.txt");
+                        ficheroEntrada = new FileInputStream(PATH);
                         ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
                         c = (Cliente)tuberiaEntrada.readObject();
                         c.mostrarCliente();
