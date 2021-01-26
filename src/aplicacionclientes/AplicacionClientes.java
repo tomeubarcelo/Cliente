@@ -108,12 +108,14 @@ public class AplicacionClientes {
                     
              
                         Cliente c;
-
+                        Cliente c1;
                         try{
                             ficheroEntrada = new FileInputStream(PATH);
                             ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
                             c = (Cliente)tuberiaEntrada.readObject();
+                            c1 = (Cliente)tuberiaEntrada.readObject();
                             c.mostrarCliente();
+                            c1.mostrarCliente();
                         } catch(FileNotFoundException ex){
                             ex.printStackTrace();
                         } catch(IOException ex){
