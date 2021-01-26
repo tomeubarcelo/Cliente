@@ -30,7 +30,7 @@ public class AplicacionClientes {
         final String PATH = "clientes.txt";
         File fich = new File(PATH);
         
-        
+        Cliente array[] = new Cliente[2];
         
         // instanciamos la clase de solicitudes por teclado
         FuncionamientoApp solicitud = new FuncionamientoApp();
@@ -43,14 +43,14 @@ public class AplicacionClientes {
 
                     
                     //comprobamos que existe el fichero para cargar los datos si es que existe
-                    if (fich.exists()){
+                    /*if (fich.exists()){
                         System.err.println("Ya existe el fichero");
                         throw new Exception("Ya existe el fichero");
-                    }
+                    }*/
                     //FIN COMPROBAR
                     
                     
-                    Cliente array[] = new Cliente[2];
+                    
                     
                     for (int i = 0; i < array.length; i++) {
                         // Tenemos un array de 5 elementos.
@@ -75,15 +75,15 @@ public class AplicacionClientes {
 
                         //FECHA NACIMIENTO CLIENTE
                         fechaNacimiento(solicitud, array[i], sal);
-
+}
                         //FICHEROS
                         FileOutputStream fichero = null;
-
+                            
                         try{
                             fichero = new FileOutputStream(PATH);
                             ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-                            tuberia.writeObject(array[i]);
-
+                            tuberia.writeObject(array[0]);
+                            tuberia.writeObject(array[1]);
                         } catch(FileNotFoundException ex){
                             ex.printStackTrace();
                         } catch(IOException ex){
@@ -95,7 +95,7 @@ public class AplicacionClientes {
                                 ex.printStackTrace();
                             }
                         }            
-                    }
+                    
                     break;
 
 
@@ -105,20 +105,23 @@ public class AplicacionClientes {
                     //leer objecto DEL FICHERO
         
                     FileInputStream ficheroEntrada = null;
-                    Cliente c;
+                    
+             
+                        Cliente c;
 
-                    try{
-                        ficheroEntrada = new FileInputStream(PATH);
-                        ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
-                        c = (Cliente)tuberiaEntrada.readObject();
-                        c.mostrarCliente();
-                    } catch(FileNotFoundException ex){
-                        ex.printStackTrace();
-                    } catch(IOException ex){
-                        ex.printStackTrace();
-                    } catch(ClassNotFoundException ex){
-                        ex.printStackTrace();
-                    } 
+                        try{
+                            ficheroEntrada = new FileInputStream(PATH);
+                            ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
+                            c = (Cliente)tuberiaEntrada.readObject();
+                            c.mostrarCliente();
+                        } catch(FileNotFoundException ex){
+                            ex.printStackTrace();
+                        } catch(IOException ex){
+                            ex.printStackTrace();
+                        } catch(ClassNotFoundException ex){
+                            ex.printStackTrace();
+                        } 
+                    
                     break;
                 case 3: 
                     System.out.println("3");
