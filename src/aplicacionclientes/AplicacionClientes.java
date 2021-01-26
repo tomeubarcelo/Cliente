@@ -43,10 +43,10 @@ public class AplicacionClientes {
 
                     
                     //comprobamos que existe el fichero para cargar los datos si es que existe
-                    /*if (fich.exists()){
+                    if (fich.exists()){
                         System.err.println("Ya existe el fichero");
                         throw new Exception("Ya existe el fichero");
-                    }*/
+                    }
                     //FIN COMPROBAR
                     
                     
@@ -108,14 +108,15 @@ public class AplicacionClientes {
                     
              
                         Cliente c;
-                        Cliente c1;
                         try{
                             ficheroEntrada = new FileInputStream(PATH);
                             ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
-                            c = (Cliente)tuberiaEntrada.readObject();
-                            c1 = (Cliente)tuberiaEntrada.readObject();
-                            c.mostrarCliente();
-                            c1.mostrarCliente();
+                            for (int i = 0; i < array.length; i++) {
+                                System.out.println("-------Cliente "+i+"-------");
+                                array[i] = (Cliente)tuberiaEntrada.readObject();
+                                array[i].mostrarCliente();
+                                System.out.println("");
+                            }
                         } catch(FileNotFoundException ex){
                             ex.printStackTrace();
                         } catch(IOException ex){
