@@ -124,11 +124,6 @@ public class AplicacionClientes {
                         }
                     } while (!sal);
 
-
-
-
-
-
                     //FICHEROS
 
                     FileOutputStream fichero = null;
@@ -207,21 +202,21 @@ public class AplicacionClientes {
         do{
             try{
                 Scanner op = new Scanner (System.in);
-            //menú d'opcions del programa
+                //menú de opciones del programa
                 System.out.println("1. Crear fichero clientes. ");
                 System.out.println("2. Listar clientes. ");
                 System.out.println("3. Buscar un cliente. ");
                 System.out.println("4. Felicitar clientes. "); 
                 System.out.println("5. Borrar fichero de clientes.");
                 System.out.println("6. Salir.");
-                System.out.print("Introdueix l'opcio elegida: ");
+                System.out.print("Introduce la opción elegida: ");
                 opcio=op.nextByte();
                 if (opcio < 1 || opcio > 6) {
-                System.out.println("Escollir entre (1..6)!.");    
+                System.out.println("Escoger entre (1..6)!.");    
                 }
             }    
             catch(Exception e){
-                System.out.println("Error al llegir del teclat(1..6)!.");
+                System.out.println("Error al leer del teclado(1..6)!.");
             }
             
         }while (opcio < 1 || opcio > 6);
