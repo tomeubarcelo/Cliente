@@ -123,6 +123,12 @@ public class AplicacionClientes {
                             ex.printStackTrace();
                         } catch(ClassNotFoundException ex){
                             ex.printStackTrace();
+                        } finally{
+                            try{
+                               ficheroEntrada.close();   
+                            } catch(IOException ex){
+                                ex.printStackTrace();
+                            }
                         } 
                     
                     break;
