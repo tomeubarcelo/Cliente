@@ -28,11 +28,15 @@ public class AplicacionClientes {
         // TODO code application logic here
 
         final String PATH = "clientes.txt";
+        
         Cliente cliente1 = new Cliente ();
-          ArrayList listaDeObjetosCliente = new ArrayList();
+        
+        // instanciamos la clase de solicitudes por teclado
+        FuncionamientoApp solicitud = new FuncionamientoApp();
+        
         byte opcio;
         do { 
-            opcio = menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
+            opcio = solicitud.menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
             switch (opcio) {
                 case 1: 
 
@@ -49,7 +53,7 @@ public class AplicacionClientes {
                     
                     //NOMBRE CLIENTE
                     do {   
-                    String nombreCliente = pideNombre();
+                    String nombreCliente = solicitud.pideNombre();
                         try {
                             cliente1.validaNombre(nombreCliente);    
                             boolean formatoCorrecto = cliente1.validaNombre(nombreCliente);
@@ -65,7 +69,7 @@ public class AplicacionClientes {
                     //DNI CLIENTE
                     do {  
                     sal = false;
-                    String dniCliente = pideDni();
+                    String dniCliente = solicitud.pideDni();
                         try {
                             cliente1.validaDni(dniCliente);
                             //System.out.println(cliente1.validaDni(dniCliente));
@@ -84,7 +88,7 @@ public class AplicacionClientes {
                     //TELEFONO CLIENTE
                     do {  
                         sal = false;
-                        String tlfCliente = pideTelefono();
+                        String tlfCliente = solicitud.pideTelefono();
                         try {
                             cliente1.validaTelefono(tlfCliente);
 
@@ -102,7 +106,7 @@ public class AplicacionClientes {
                     //CORREO CLIENTE
                     do {  
                         sal = false;
-                        String correoCliente = pideCorreo();
+                        String correoCliente = solicitud.pideCorreo();
                         try {
                             cliente1.validaCorreo(correoCliente);
                             //System.out.println(cliente1.validaDni(dniCliente));
@@ -121,7 +125,7 @@ public class AplicacionClientes {
                     //FECHA NACIMIENTO CLIENTE
                     do {  
                         sal = false;
-                        String fechaNacCliente = pideFechaNacimiento();
+                        String fechaNacCliente = solicitud.pideFechaNacimiento();
                         try {
                             cliente1.validaFechaNacimiento(fechaNacCliente);
                             //System.out.println(cliente1.validaDni(dniCliente));
@@ -209,66 +213,6 @@ public class AplicacionClientes {
         
 
     }
-    
-    private static byte menuOpcions() {
-        byte opcio=0;
-        do{
-            try{
-                Scanner op = new Scanner (System.in);
-                //menú de opciones del programa
-                System.out.println("1. Crear fichero clientes. ");
-                System.out.println("2. Listar clientes. ");
-                System.out.println("3. Buscar un cliente. ");
-                System.out.println("4. Felicitar clientes. "); 
-                System.out.println("5. Borrar fichero de clientes.");
-                System.out.println("6. Salir.");
-                System.out.print("Introduce la opción elegida: ");
-                opcio=op.nextByte();
-                if (opcio < 1 || opcio > 6) {
-                System.out.println("Escoger entre (1..6)!.");    
-                }
-            }    
-            catch(Exception e){
-                System.out.println("Error al leer del teclado(1..6)!.");
-            }
-            
-        }while (opcio < 1 || opcio > 6);
-        return opcio;
-    }
-    
-    private static String pideNombre() {
-        Scanner entradaScanner = new Scanner (System.in);
-        System.out.println("Introduce tu nombre y apellidos.");
-        String nombre = entradaScanner.nextLine();
-        return nombre;
-    }
-    
-    private static String pideDni() {
-        Scanner entradaScanner = new Scanner (System.in);
-        System.out.println("Introduce tu DNI.");
-        String dni = entradaScanner.nextLine();
-        return dni;
-    }
-    
-    private static String pideTelefono(){
-        Scanner entradaScanner = new Scanner (System.in);
-        System.out.println("Introduce tu teléfono.");
-        String tlf = entradaScanner.nextLine();
-        return tlf;
-    }
-    
-    private static String pideCorreo(){
-        Scanner entradaScanner = new Scanner (System.in);
-        System.out.println("Introduce tu correo electronico.");
-        String correo = entradaScanner.nextLine();
-        return correo;
-    }
-    
-    private static String pideFechaNacimiento(){
-        Scanner entradaScanner = new Scanner (System.in);
-        System.out.println("Introduce tu fecha de nacimiento.");
-        String fechaNac = entradaScanner.nextLine();
-        return fechaNac;
-    }
+
     
 }
