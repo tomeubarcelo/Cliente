@@ -135,28 +135,8 @@ public class AplicacionClientes {
                 case 3: 
                     System.out.println("3");
                     //buscar un cliente
-                    boolean encontrado = false;
-                    Scanner entradaScanner = new Scanner (System.in);
-                    System.out.println("Introduce el DNI a buscar:");
-                    String dniParaBuscar = entradaScanner.nextLine();
-                    
-                    for (int i = 0; i < array.length; i++) {
-                        if (array[i].getNIF().equals(dniParaBuscar)) {
-                            System.out.println("Se han encontrado los datos del nif " + dniParaBuscar);
-                            System.out.print("cliente:" + array[i].getNombre());
-                            System.out.print(", dirección:" + array[i].getTelefono());
-                            System.out.print(", tfno.:" + array[i].getCorreo());
-                            System.out.print(", deuda:" + array[i].getFechaNacimiento()+ "\n");
-                            encontrado = true;
-                        }
-                    }
-                    if (!encontrado){
-                        System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
-                    }
-                    
-                    
-                    
-                    
+                    buscaDni(array);
+       
                     break;
                 case 4:
                     System.out.println("4");
@@ -274,6 +254,31 @@ public class AplicacionClientes {
                     System.out.println(e.getMessage());
                 }
             } while (!sal);
+    }
+    
+    public static void buscaDni(Cliente array[]){
+        boolean encontrado = false;
+                    Scanner entradaScanner = new Scanner (System.in);
+                    System.out.println("Introduce el DNI a buscar:");
+                    String dniParaBuscar = entradaScanner.nextLine();
+                    
+                    //recorremos el array de clientes
+                    for (int i = 0; i < array.length; i++) {
+                        //si algun dni del array coincide con el dni introducido
+                        if (array[i].getNIF().equals(dniParaBuscar)) {
+                            System.out.println("Se han encontrado los datos del nif " + dniParaBuscar);
+                            System.out.print("cliente:" + array[i].getNombre());
+                            System.out.print(", dirección:" + array[i].getTelefono());
+                            System.out.print(", tfno.:" + array[i].getCorreo());
+                            System.out.print(", deuda:" + array[i].getFechaNacimiento()+ "\n");
+                            encontrado = true;
+                        }
+                    }
+                    //si no se ha encontrado
+                    if (!encontrado){
+                        System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
+                    }
+                    
     }
     
 }
