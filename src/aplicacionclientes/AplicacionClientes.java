@@ -30,7 +30,7 @@ public class AplicacionClientes {
         final String PATH = "clientes.txt";
         File fich = new File(PATH);
         
-        Cliente array[] = new Cliente[2];
+        Cliente array[] = new Cliente[3];
         
         // instanciamos la clase de solicitudes por teclado
         FuncionamientoApp solicitud = new FuncionamientoApp();
@@ -57,7 +57,7 @@ public class AplicacionClientes {
 
                         
                         array[i] = new Cliente();
-                        System.out.println("Cliente "+i);
+                        System.out.println("-------Cliente "+(i+1)+"-------");
                         boolean sal = false;
 
 
@@ -82,8 +82,9 @@ public class AplicacionClientes {
                         try{
                             fichero = new FileOutputStream(PATH);
                             ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-                            tuberia.writeObject(array[0]);
-                            tuberia.writeObject(array[1]);
+                            for (int i = 0; i < array.length; i++) {
+                            tuberia.writeObject(array[i]);
+                            }
                         } catch(FileNotFoundException ex){
                             ex.printStackTrace();
                         } catch(IOException ex){
@@ -112,7 +113,7 @@ public class AplicacionClientes {
                             ficheroEntrada = new FileInputStream(PATH);
                             ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
                             for (int i = 0; i < array.length; i++) {
-                                System.out.println("-------Cliente "+i+"-------");
+                                System.out.println("-------Cliente "+(i+1)+"-------");
                                 array[i] = (Cliente)tuberiaEntrada.readObject();
                                 array[i].mostrarCliente();
                                 System.out.println("");
