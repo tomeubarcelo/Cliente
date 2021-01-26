@@ -134,6 +134,29 @@ public class AplicacionClientes {
                     break;
                 case 3: 
                     System.out.println("3");
+                    //buscar un cliente
+                    boolean encontrado = false;
+                    Scanner entradaScanner = new Scanner (System.in);
+                    System.out.println("Introduce el DNI a buscar:");
+                    String dniParaBuscar = entradaScanner.nextLine();
+                    
+                    for (int i = 0; i < array.length; i++) {
+                        if (array[i].getNIF().equals(dniParaBuscar)) {
+                            System.out.println("Se han encontrado los datos del nif " + dniParaBuscar);
+                            System.out.print("cliente:" + array[i].getNombre());
+                            System.out.print(", dirección:" + array[i].getTelefono());
+                            System.out.print(", tfno.:" + array[i].getCorreo());
+                            System.out.print(", deuda:" + array[i].getFechaNacimiento()+ "\n");
+                            encontrado = true;
+                        }
+                    }
+                    if (!encontrado){
+                        System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
+                    }
+                    
+                    
+                    
+                    
                     break;
                 case 4:
                     System.out.println("4");
