@@ -19,7 +19,7 @@ public class FuncionamientoApp {
             try{
                 Scanner op = new Scanner (System.in);
                 //menú de opciones del programa
-                System.out.println("1. Crear fichero clientes. ");
+                System.out.println("\n1. Crear fichero clientes. ");
                 System.out.println("2. Listar clientes. ");
                 System.out.println("3. Buscar un cliente. ");
                 System.out.println("4. Felicitar clientes. "); 

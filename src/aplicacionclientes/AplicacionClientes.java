@@ -27,7 +27,7 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
 
-        final String PATH = "clientes.txt";
+        final String PATH = "clientes.dat";
         File fich = new File(PATH);
         
         Cliente array[] = new Cliente[3];
@@ -57,7 +57,7 @@ public class AplicacionClientes {
 
                         
                         array[i] = new Cliente();
-                        System.out.println("-------Cliente "+(i+1)+"-------");
+                        System.out.println("\n-------Cliente "+(i+1)+"-------");
                         boolean sal = false;
 
 
@@ -75,7 +75,9 @@ public class AplicacionClientes {
 
                         //FECHA NACIMIENTO CLIENTE
                         fechaNacimiento(solicitud, array[i], sal);
-}
+                        
+                    }//fin bucle
+                    
                         //FICHEROS
                         FileOutputStream fichero = null;
                             
@@ -113,10 +115,9 @@ public class AplicacionClientes {
                             ficheroEntrada = new FileInputStream(PATH);
                             ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
                             for (int i = 0; i < array.length; i++) {
-                                System.out.println("-------Cliente "+(i+1)+"-------");
+                                System.out.println("\n-------Cliente "+(i+1)+"-------");
                                 array[i] = (Cliente)tuberiaEntrada.readObject();
                                 array[i].mostrarCliente();
-                                System.out.println("");
                             }
                         } catch(FileNotFoundException ex){
                             ex.printStackTrace();
