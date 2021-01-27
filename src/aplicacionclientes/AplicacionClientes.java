@@ -24,6 +24,12 @@ public class AplicacionClientes {
     /**
      * @param args the command line arguments
      */
+        //variables para colores a usar en consola
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+    
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
 
@@ -57,7 +63,7 @@ public class AplicacionClientes {
 
                         
                         array[i] = new Cliente();
-                        System.out.println("\n-------Cliente "+(i+1)+"-------");
+                        System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
                         boolean sal = false;
 
 
@@ -115,7 +121,7 @@ public class AplicacionClientes {
                             ficheroEntrada = new FileInputStream(PATH);
                             ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
                             for (int i = 0; i < array.length; i++) {
-                                System.out.println("\n-------Cliente "+(i+1)+"-------");
+                                System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
                                 array[i] = (Cliente)tuberiaEntrada.readObject();
                                 array[i].mostrarCliente();
                             }
@@ -268,11 +274,11 @@ public class AplicacionClientes {
                     for (int i = 0; i < array.length; i++) {
                         //si algun dni del array coincide con el dni introducido
                         if (array[i].getNIF().equals(dniParaBuscar)) {
-                            System.out.println("Se han encontrado los datos del nif " + dniParaBuscar);
-                            System.out.print("cliente:" + array[i].getNombre());
-                            System.out.print(", dirección:" + array[i].getTelefono());
-                            System.out.print(", tfno.:" + array[i].getCorreo());
-                            System.out.print(", deuda:" + array[i].getFechaNacimiento()+ "\n");
+                            System.out.println("\nSe han encontrado los datos del cliente con DNI: " + dniParaBuscar);
+                            System.out.println("Nombre: " + array[i].getNombre());
+                            System.out.println("Telefono: " + array[i].getTelefono());
+                            System.out.println("Correo: " + array[i].getCorreo());
+                            System.out.println("Fecha de nacimiento: " + array[i].getFechaNacimiento());
                             encontrado = true;
                         }
                     }
