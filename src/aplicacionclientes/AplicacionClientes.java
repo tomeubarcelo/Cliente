@@ -12,7 +12,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -32,6 +35,11 @@ public class AplicacionClientes {
     
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
+        
+        //fechas
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaDate = null;
+        Date fechaHoy = new Date();
 
         final String PATH = "clientes.dat";
         File fich = new File(PATH);
@@ -148,6 +156,25 @@ public class AplicacionClientes {
                     break;
                 case 4:
                     System.out.println("4");
+                    //felicitar clientes
+                    for (int i = 0; i < array.length; i++) {
+                        if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
+                            //si el formato de fecha es valido..
+                            System.err.println(array[i].getFechaNacimiento());
+                            try {
+                                fechaDate = formato.parse(array[i].getFechaNacimiento());
+                                System.err.println(fechaDate);
+                                System.out.println (fechaHoy);    
+
+                                
+                            } 
+                            catch (ParseException ex) 
+                            {
+                                System.out.println(ex);
+                            }
+                        }
+                    }
+                    
                     break;
                 case 5:
                     System.out.println("5");
@@ -266,26 +293,26 @@ public class AplicacionClientes {
     
     public static void buscaDni(Cliente array[]){
         boolean encontrado = false;
-                    Scanner entradaScanner = new Scanner (System.in);
-                    System.out.println("Introduce el DNI a buscar:");
-                    String dniParaBuscar = entradaScanner.nextLine();
-                    
-                    //recorremos el array de clientes
-                    for (int i = 0; i < array.length; i++) {
-                        //si algun dni del array coincide con el dni introducido
-                        if (array[i].getNIF().equals(dniParaBuscar)) {
-                            System.out.println("\nSe han encontrado los datos del cliente con DNI: " + dniParaBuscar);
-                            System.out.println("Nombre: " + array[i].getNombre());
-                            System.out.println("Telefono: " + array[i].getTelefono());
-                            System.out.println("Correo: " + array[i].getCorreo());
-                            System.out.println("Fecha de nacimiento: " + array[i].getFechaNacimiento());
-                            encontrado = true;
-                        }
-                    }
-                    //si no se ha encontrado
-                    if (!encontrado){
-                        System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
-                    }
+        Scanner entradaScanner = new Scanner (System.in);
+        System.out.println("Introduce el DNI a buscar:");
+        String dniParaBuscar = entradaScanner.nextLine();
+
+        //recorremos el array de clientes
+        for (int i = 0; i < array.length; i++) {
+            //si algun dni del array coincide con el dni introducido
+            if (array[i].getNIF().equals(dniParaBuscar)) {
+                System.out.println("\nSe han encontrado los datos del cliente con DNI: " + dniParaBuscar);
+                System.out.println("Nombre: " + array[i].getNombre());
+                System.out.println("Telefono: " + array[i].getTelefono());
+                System.out.println("Correo: " + array[i].getCorreo());
+                System.out.println("Fecha de nacimiento: " + array[i].getFechaNacimiento());
+                encontrado = true;
+            }
+        }
+        //si no se ha encontrado
+        if (!encontrado){
+            System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
+        }
                     
     }
     
