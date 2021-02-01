@@ -14,6 +14,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,12 +40,8 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
         
-        //fechas
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        Date fechaDate = null;
-        Date fechaHoy = new Date();
-        Calendar fecha = new GregorianCalendar();
-        Calendar fechaCliente = null;
+        
+
         final String PATH = "clientes.dat";
         File fich = new File(PATH);
         
@@ -160,31 +158,28 @@ public class AplicacionClientes {
                 case 4:
                     System.out.println("4");
                     //felicitar clientes
+                    //fechas
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-mm-yyyy");
+                    
+                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+                    LocalDate myObj = LocalDate.now();  // Create a date object
+                    System.out.println(myObj);  // Display the current date
+                    String formattedDate = myObj.format(myFormatObj);  
+                    System.out.println("After Formatting: " + formattedDate + "\nDay: "+myObj.getDayOfMonth() + ", month: "+myObj.getMonthValue());  
+                    System.out.println("Le sumamos 7: " +myObj.plusDays(7));  
+                    System.out.println("Le restamos 7: " +myObj.minusDays(7));  
+                                
                     for (int i = 0; i < array.length; i++) {
                         if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
                             //si el formato de fecha es valido..
-                            System.err.println("Fecha introducida por el usuario "+array[i].getFechaNacimiento());
-                            try {
-                                //Obtenemos el valor del año, mes, día,
-                                //usando el método get y el parámetro correspondiente                                                     
-                                int año = fecha.get(Calendar.YEAR);
-                                int mes = fecha.get(Calendar.MONTH);
-                                int dia = fecha.get(Calendar.DAY_OF_MONTH);
-                                
-                                //Mostramos por pantalla dia/mes/año
-                                System.out.println("Fecha Actual: " + dia + "/" + (mes+1) + "/" + año);
-                                //sumar 10 días a la fecha actual                                                                                 
-                                fecha.add(Calendar.DAY_OF_MONTH, 10);
-
-                                fechaDate = formato.parse(array[i].getFechaNacimiento());
-
-
-                                
-                            } 
-                            catch (ParseException ex) 
-                            {
-                                System.out.println(ex);
-                            }
+                            System.out.println("Fecha introducida por el usuario "+array[i].getFechaNacimiento());
+                            //fechaDate = formato.parse(array[i].getFechaNacimiento());
+                            
+                            LocalDate localDate = LocalDate.parse(array[i].getFechaNacimiento(), myFormatObj);
+                            //Date date1=formato.parse(array[i].getFechaNacimiento()); 
+                            
+                            
+                            System.out.println(localDate);
                         }
                     }
                     
