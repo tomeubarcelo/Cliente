@@ -15,7 +15,9 @@ import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -40,7 +42,8 @@ public class AplicacionClientes {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaDate = null;
         Date fechaHoy = new Date();
-
+        Calendar fecha = new GregorianCalendar();
+        Calendar fechaCliente = null;
         final String PATH = "clientes.dat";
         File fich = new File(PATH);
         
@@ -160,11 +163,21 @@ public class AplicacionClientes {
                     for (int i = 0; i < array.length; i++) {
                         if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
                             //si el formato de fecha es valido..
-                            System.err.println(array[i].getFechaNacimiento());
+                            System.err.println("Fecha introducida por el usuario "+array[i].getFechaNacimiento());
                             try {
+                                //Obtenemos el valor del año, mes, día,
+                                //usando el método get y el parámetro correspondiente                                                     
+                                int año = fecha.get(Calendar.YEAR);
+                                int mes = fecha.get(Calendar.MONTH);
+                                int dia = fecha.get(Calendar.DAY_OF_MONTH);
+                                
+                                //Mostramos por pantalla dia/mes/año
+                                System.out.println("Fecha Actual: " + dia + "/" + (mes+1) + "/" + año);
+                                //sumar 10 días a la fecha actual                                                                                 
+                                fecha.add(Calendar.DAY_OF_MONTH, 10);
+
                                 fechaDate = formato.parse(array[i].getFechaNacimiento());
-                                System.err.println(fechaDate);
-                                System.out.println (fechaHoy);    
+
 
                                 
                             } 
