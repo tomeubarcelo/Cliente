@@ -205,6 +205,42 @@ public class AplicacionClientes {
                                 String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
                                 
                                 System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
+                                
+                                
+                        String ficheroFelicitar = "felicitacionClientes.dat";
+                        
+                        File fichCumple = new File(ficheroFelicitar);        
+                        /*if (fichCumple.exists()){
+                            System.err.println("Ya existe el fichero");
+                            throw new Exception("Ya existe el fichero");
+                        }  */ 
+
+
+                        //FICHEROS
+                                
+    
+                                
+                        FileOutputStream ficheroCumple = null;
+                            
+                        try{
+                            ficheroCumple = new FileOutputStream(ficheroFelicitar);
+                            ObjectOutputStream tuberia = new ObjectOutputStream(ficheroCumple);
+                            for (int j = 0; j < array.length; j++) {
+                            tuberia.writeObject(array[j]);
+                            }
+                        } catch(FileNotFoundException ex){
+                            ex.printStackTrace();
+                        } catch(IOException ex){
+                            ex.printStackTrace();
+                        } finally{
+                            try{
+                               ficheroCumple.close();   
+                            } catch(IOException ex){
+                                ex.printStackTrace();
+                            }
+                        }   
+                                
+                                
                             } else{
                                 String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
                                 String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
