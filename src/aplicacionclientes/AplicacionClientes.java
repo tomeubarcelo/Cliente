@@ -16,14 +16,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -204,7 +198,9 @@ public class AplicacionClientes {
                             
                             
                             //System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
-                                    
+                            
+                            //condicional para saber si el cumpleaños del cliente esta entre el dia de hoy y el el dia de hoy+7
+                            //ambos dias incluidos
                             if ((anyoClienteActual.isAfter(fechaActual)|| anyoClienteActual.isEqual(fechaActual))&& (anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)|| anyoClienteActual.isEqual(fechaDeHoyMasUnaSemana) )) {
                                 System.out.println("El cliente "+array[i].getNombre() +" cumple años esta semana");
                                 String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
@@ -212,19 +208,18 @@ public class AplicacionClientes {
                                 
                                 System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
                                 
-                        //crearemos el nuevo fichero para felicitar clientes                           
-                        PrintWriter out = null;
-                        out = new PrintWriter(new FileWriter("felicitacionClientes.txt",true));        
-                        BufferedReader br = new BufferedReader(
-                                new InputStreamReader(System.in)
-                        );
-                        out.println("FELICIDADES "+array[i].getNombre()+"!!!");
-                        out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
-                        out.close();
+                                //crearemos el nuevo fichero para felicitar clientes                           
+                                PrintWriter out = null;
+                                out = new PrintWriter(new FileWriter("felicitacionClientes.txt",true));        
+                                BufferedReader br = new BufferedReader(
+                                        new InputStreamReader(System.in)
+                                );
+                                out.println("FELICIDADES "+array[i].getNombre()+"!!!");
+                                out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
+                                out.close();
                         
-                        
-                        
-                            } else{
+
+                            } else{ //caso en el que el cliente no cumpla el cumpleaños en el margen de tiempo estipulado
                                 String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
                                 String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
                                 System.out.println("El cliente "+array[i].getNombre() +" NO cumple años esta semana");
