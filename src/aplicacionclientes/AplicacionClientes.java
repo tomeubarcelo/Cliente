@@ -206,7 +206,7 @@ public class AplicacionClientes {
                                 
                                 System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
                                 
-                                
+                        //crearemos el nuevo fichero para felicitar clientes         
                         String ficheroFelicitar = "felicitacionClientes.dat";
                         
                         File fichCumple = new File(ficheroFelicitar);        
