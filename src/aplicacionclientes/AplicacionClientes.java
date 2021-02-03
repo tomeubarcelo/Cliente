@@ -199,10 +199,12 @@ public class AplicacionClientes {
                             
                             System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
                                     
-                            if (myObj.isBefore(anyoClienteActual) ) {
-                                System.out.println("La fecha de: "+myObj+" es menor que "+anyoClienteActual);
-                            } else if(myObj.isAfter(localDate)){
-                                System.out.println("La fecha de: "+myObj+" es mayor que "+anyoClienteActual);
+                            if (anyoClienteActual.isAfter(myObj) && anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)) {
+                                System.out.println("El cliente cumple años esta semana");
+                                System.out.println("Su cumpleaños es: "+anyoClienteActual + " y está entre: "+myObj + " y "+fechaDeHoyMasUnaSemana);
+                            } else{
+                                System.out.println("El cliente NO cumple años esta semana");
+                                System.out.println("Su cumpleaños es: "+anyoClienteActual + " y NO está entre: "+myObj + " y "+fechaDeHoyMasUnaSemana);
                             }
                         }
                         System.out.println("\n");
