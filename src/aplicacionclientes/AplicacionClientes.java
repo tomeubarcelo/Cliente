@@ -54,7 +54,7 @@ public class AplicacionClientes {
             switch (opcio) {
                 case 1: 
 
-                    
+
                     //comprobamos que existe el fichero para cargar los datos si es que existe
                     if (fich.exists()){
                         System.err.println("Ya existe el fichero");
@@ -62,9 +62,7 @@ public class AplicacionClientes {
                     }
                     //FIN COMPROBAR
                     
-                    
-                    
-                    
+
                     for (int i = 0; i < array.length; i++) {
                         // Tenemos un array de 5 elementos.
 
