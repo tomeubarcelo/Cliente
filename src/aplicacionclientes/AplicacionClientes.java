@@ -166,9 +166,14 @@ public class AplicacionClientes {
                     System.out.println(myObj);  // Display the current date
                     String formattedDate = myObj.format(myFormatObj);  
                     System.out.println("After Formatting: " + formattedDate + "\nDay: "+myObj.getDayOfMonth() + ", month: "+myObj.getMonthValue());  
+                    
+                    //fecha de hoy + 7 dias
+                    LocalDate fechaDeHoyMasUnaSemana = myObj.plusDays(7);
                     System.out.println("Le sumamos 7: " +myObj.plusDays(7));  
                     System.out.println("Le restamos 7: " +myObj.minusDays(7));  
                                 
+                    
+                    
                     for (int i = 0; i < array.length; i++) {
                         if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
                             //si el formato de fecha es valido..
@@ -180,7 +185,27 @@ public class AplicacionClientes {
                             
                             
                             System.out.println(localDate);
+                            
+                            //debemos averiguar los años de diferencia, para que los 2 esten en el mismo año
+                            System.out.println("Año actual: "+myObj.getYear());
+                            System.out.println("Año nacimiento cliente: "+localDate.getYear());
+                            int differ = myObj.getYear() - localDate.getYear();
+                            System.out.println("La diferencia de años es: "+differ);
+                            LocalDate anyoClienteActual = localDate.plusYears(differ);
+                            System.out.println("Por lo tanto ahora es: "+anyoClienteActual);
+                            System.out.println("Fecha de hoy: "+myObj);
+                            System.out.println("Cumpleaños del cliente en ste año: "+anyoClienteActual);
+                            
+                            
+                            System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
+                                    
+                            if (myObj.isBefore(anyoClienteActual) ) {
+                                System.out.println("La fecha de: "+myObj+" es menor que "+anyoClienteActual);
+                            } else if(myObj.isAfter(localDate)){
+                                System.out.println("La fecha de: "+myObj+" es mayor que "+anyoClienteActual);
+                            }
                         }
+                        System.out.println("\n");
                     }
                     
                     break;
