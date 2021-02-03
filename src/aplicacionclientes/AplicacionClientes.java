@@ -199,12 +199,17 @@ public class AplicacionClientes {
                             
                             System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
                                     
-                            if (anyoClienteActual.isAfter(myObj) && anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)) {
+                            if ((anyoClienteActual.isAfter(myObj)|| anyoClienteActual.isEqual(myObj))&& (anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)|| anyoClienteActual.isEqual(fechaDeHoyMasUnaSemana) )) {
                                 System.out.println("El cliente cumple años esta semana");
-                                System.out.println("Su cumpleaños es: "+anyoClienteActual + " y está entre: "+myObj + " y "+fechaDeHoyMasUnaSemana);
+                                String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
+                                String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
+                                
+                                System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
                             } else{
+                                String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
+                                String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
                                 System.out.println("El cliente NO cumple años esta semana");
-                                System.out.println("Su cumpleaños es: "+anyoClienteActual + " y NO está entre: "+myObj + " y "+fechaDeHoyMasUnaSemana);
+                                System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y NO está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
                             }
                         }
                         System.out.println("\n");
