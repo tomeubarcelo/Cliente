@@ -179,76 +179,40 @@ public class AplicacionClientes {
                     
                     File archivo = new File("felicitacionClientes.txt");
                     if (archivo.exists()) {
-                        System.err.println("Ya existe el fichero");
-                        throw new Exception("Ya existe el fichero");
+                        System.err.println("Ya existe el fichero "+archivo);
+                        throw new Exception("Ya existe el fichero "+archivo);
                     }
                     
                     for (int i = 0; i < array.length; i++) {
                         if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
-                            //si el formato de fecha es valido..
-                            System.out.println("Fecha introducida por el usuario "+array[i].getFechaNacimiento());
-                            //fechaDate = formato.parse(array[i].getFechaNacimiento());
+                            //si el formato de fecha es valido...
+                            //System.out.println("Fecha introducida por el usuario "+array[i].getFechaNacimiento());
+
                             
                             LocalDate localDate = LocalDate.parse(array[i].getFechaNacimiento(), myFormatObj);
-                            //Date date1=formato.parse(array[i].getFechaNacimiento()); 
-                            
-                            
-                            System.out.println(localDate);
+                            //System.out.println(localDate);
                             
                             //debemos averiguar los años de diferencia, para que los 2 esten en el mismo año
-                            System.out.println("Año actual: "+fechaActual.getYear());
-                            System.out.println("Año nacimiento cliente: "+localDate.getYear());
+                            //System.out.println("Año actual: "+fechaActual.getYear());
+                            //System.out.println("Año nacimiento cliente: "+localDate.getYear());
                             int differ = fechaActual.getYear() - localDate.getYear();
-                            System.out.println("La diferencia de años es: "+differ);
+                            //System.out.println("La diferencia de años es: "+differ);
                             LocalDate anyoClienteActual = localDate.plusYears(differ);
-                            System.out.println("Por lo tanto ahora es: "+anyoClienteActual);
-                            System.out.println("Fecha de hoy: "+fechaActual);
-                            System.out.println("Cumpleaños del cliente en ste año: "+anyoClienteActual);
+                            //System.out.println("Por lo tanto ahora es: "+anyoClienteActual);
+                            //System.out.println("Fecha de hoy: "+fechaActual);
+                            //System.out.println("Cumpleaños del cliente en ste año: "+anyoClienteActual);
                             
                             
-                            System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
+                            //System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
                                     
                             if ((anyoClienteActual.isAfter(fechaActual)|| anyoClienteActual.isEqual(fechaActual))&& (anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)|| anyoClienteActual.isEqual(fechaDeHoyMasUnaSemana) )) {
-                                System.out.println("El cliente cumple años esta semana");
+                                System.out.println("El cliente "+array[i].getNombre() +" cumple años esta semana");
                                 String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
                                 String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
                                 
                                 System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
                                 
-                        //crearemos el nuevo fichero para felicitar clientes         
-                        String ficheroFelicitar = "felicitacionClientes.dat";
-                        
-                        File fichCumple = new File(ficheroFelicitar);        
-                        /*if (fichCumple.exists()){
-                            System.err.println("Ya existe el fichero");
-                            throw new Exception("Ya existe el fichero");
-                        }  */ 
-
-
-                        //FICHEROS
-                                
-    
-                                
-                        FileOutputStream ficheroCumple = null;
-                            
-                        try{
-                            ficheroCumple = new FileOutputStream(ficheroFelicitar);
-                            ObjectOutputStream tuberia = new ObjectOutputStream(ficheroCumple);
-                            for (int j = 0; j < array.length; j++) {
-                                tuberia.writeObject(array[j]);
-                            }
-                        } catch(FileNotFoundException ex){
-                            ex.printStackTrace();
-                        } catch(IOException ex){
-                            ex.printStackTrace();
-                        } finally{
-                            try{
-                               ficheroCumple.close();   
-                            } catch(IOException ex){
-                                ex.printStackTrace();
-                            }
-                        }   
-                                
+                        //crearemos el nuevo fichero para felicitar clientes                           
                         PrintWriter out = null;
                         out = new PrintWriter(new FileWriter("felicitacionClientes.txt",true));        
                         BufferedReader br = new BufferedReader(
@@ -263,7 +227,7 @@ public class AplicacionClientes {
                             } else{
                                 String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
                                 String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
-                                System.out.println("El cliente NO cumple años esta semana");
+                                System.out.println("El cliente "+array[i].getNombre() +" NO cumple años esta semana");
                                 System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y NO está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
                             }
                         }
