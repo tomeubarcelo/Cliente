@@ -5,13 +5,17 @@
  */
 package aplicacionclientes;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -173,7 +177,13 @@ public class AplicacionClientes {
                     System.out.println("Le restamos 7: " +myObj.minusDays(7));  
                                 
                     
-                    
+                    PrintWriter out = null;
+                            out = new PrintWriter(new FileWriter("felicitacionClientes.txt",true));
+                            File archivo = new File("felicitacionClientes.txt");
+                            if (archivo.exists()) {
+                                System.err.println("Ya existe el fichero");
+                                throw new Exception("Ya existe el fichero");
+                            }
                     for (int i = 0; i < array.length; i++) {
                         if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
                             //si el formato de fecha es valido..
@@ -226,7 +236,7 @@ public class AplicacionClientes {
                             ficheroCumple = new FileOutputStream(ficheroFelicitar);
                             ObjectOutputStream tuberia = new ObjectOutputStream(ficheroCumple);
                             for (int j = 0; j < array.length; j++) {
-                            tuberia.writeObject(array[j]);
+                                tuberia.writeObject(array[j]);
                             }
                         } catch(FileNotFoundException ex){
                             ex.printStackTrace();
@@ -241,6 +251,15 @@ public class AplicacionClientes {
                         }   
                                 
                                 
+                        BufferedReader br = new BufferedReader(
+                                new InputStreamReader(System.in)
+                        );
+                        out.println("FELICIDADES "+array[i].getNombre()+"!!!");
+                        out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
+                        out.close();
+                        
+                        
+                        
                             } else{
                                 String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
                                 String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
