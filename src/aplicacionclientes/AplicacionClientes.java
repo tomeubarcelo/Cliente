@@ -278,10 +278,10 @@ public class AplicacionClientes {
         String dniParaBuscar;
         Scanner entradaScanner = new Scanner (System.in);
         System.out.println("Introduce el DNI a buscar:");
-        do{
-
+        do{ //bucle do-while que se hara mientras la variable sal sea falsa
+            //con este bucle le seguiremos pidiendo el dni al usuario si lo introduce mal
             dniParaBuscar = entradaScanner.nextLine();
-        
+            
             if (validaDni(dniParaBuscar, sal)) { //si el formato de dni es correcto
                 //System.out.println("DNI correcto");
                 //recorremos el array de clientes
@@ -402,12 +402,13 @@ public class AplicacionClientes {
             }
             System.out.println("\n");
         }
+        
+        //comprueba si el archivo felicitacionClientes.txt existe
         if (archivo.exists()) {
             System.out.println(ANSI_GREEN_BACKGROUND+"Fichero creado correctamente."+ANSI_RESET);
-        } else{
+        } else{ //si no existe..
             System.out.println(ANSI_RED_BACKGROUND+ANSI_WHITE+"El fichero no se ha creado ya que ningún cliente cumple años en el margen de tiempo estipulado."+ANSI_RESET);
-        }
-        
+        }       
     }
     
     //metodo que comprueba si existe el fichero asignado en el atributo
