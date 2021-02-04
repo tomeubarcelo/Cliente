@@ -46,6 +46,7 @@ public class AplicacionClientes {
         // instanciamos la clase de solicitudes por teclado
         FuncionamientoApp solicitud = new FuncionamientoApp();
         
+        System.out.println(ANSI_BLUE_BACKGROUND+ANSI_WHITE+"Bienvenido a nuestra aplicación. ¿Qué desea hacer?"+ANSI_RESET);
         byte opcio;
         do { 
             opcio = solicitud.menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
@@ -98,7 +99,8 @@ public class AplicacionClientes {
         } while (opcio==1 || opcio == 2 || opcio==3 || opcio == 4 || opcio == 5);
     } //fin metodo main
 
-    //metodos para pedir info de los clientes en la opcion 1
+    //metodos para pedir info de los clientes en la opcion 1 con sus respectivos metodos de la clase FuncionamientoApp 
+    //tambien con sus metodos de validacion
     public static void nombre(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
         do {   
             String nombreCliente = solicitud.pideNombre();
@@ -139,7 +141,6 @@ public class AplicacionClientes {
                 String tlfCliente = solicitud.pideTelefono();
                 try {
                     cliente.validaTelefono(tlfCliente);
-
                     //System.out.println(cliente1.validaDni(dniCliente));
                     boolean formatoCorrecto = cliente.validaTelefono(tlfCliente);
                     if (formatoCorrecto) {
