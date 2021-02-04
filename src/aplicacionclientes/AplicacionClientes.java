@@ -53,38 +53,29 @@ public class AplicacionClientes {
             opcio = solicitud.menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
             switch (opcio) {
                 case 1: 
-
-
-                    //comprobamos que existe el fichero para cargar los datos si es que existe
-                    /*if (fich.exists()){
-                        System.err.println("Ya existe el fichero");
-                        throw new Exception("Ya existe el fichero");
-                    }*/
-                    //FIN COMPROBAR
-                    compruebaSiExisteFichero(fich);
-                    crearFicheroClientes(array, solicitud, PATH);
-                             
                     
+                    //llamada al metodo que comprueba si existe clientes.dat
+                    compruebaSiExisteFichero(fich);
+                    System.out.println("A continuación, pediremos los datos de los clientes y los guardaremos en un fichero:");
+                    //llamada al metodo que pide los datos de los clientes
+                    crearFicheroClientes(array, solicitud, PATH);
                     break;
-
 
                 case 2: 
-                    System.out.println("2");
-                    
-                    //leer objecto DEL FICHERO
+                    System.out.println("A continuación, mostraremos la lista de los clientes:");
+                    //llamada a metodo para leer los clientes del fichero clientes.dat
                     listarClientes(array, PATH);
-                    
-                    
                     break;
+                    
                 case 3: 
-                    System.out.println("3");
+                    System.out.println("A continuación, podrá buscar al cliente que desee mediante su DNI:");
                     //buscar un cliente
                     buscaDni(array);
        
                     break;
                 case 4:
-                    //System.out.println("4");
-                    //felicitar clientes
+                    System.out.println("A continuación, se recorre el archivo clientes.dat y si hay algún cliente que cumpla años a lo largo de esta semana, se guarda en un fichero junto a sus datos.\n");
+                    //llamada al metodo para felicitar clientes
                     felicitarClientes(array);
                     
                     break;
@@ -203,56 +194,55 @@ public class AplicacionClientes {
     //FIN metodos para pedir info de los clientes en la opcion 1
     
     public static void crearFicheroClientes(Cliente array[], FuncionamientoApp solicitud, String PATH) throws Exception{
-    
+        //bucle que recorre el array de los clientes
         for (int i = 0; i < array.length; i++) {
-                        // Tenemos un array de 5 elementos.
+            // Tenemos un array de 5 elementos.
 
-                        
-                        array[i] = new Cliente();
-                        System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
-                        boolean sal = false;
+            array[i] = new Cliente(); //creacion
+            System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
+            boolean sal = false;
+            
+            //llamada a metodos que piden los datos de cada cliente
+            //NOMBRE CLIENTE
+            nombre(solicitud, array[i], sal);
 
+            //DNI CLIENTE
+            dni(solicitud, array[i], sal);
 
-                        //NOMBRE CLIENTE
-                        nombre(solicitud, array[i], sal);
+            //TELEFONO CLIENTE
+            telefono(solicitud, array[i], sal);
 
-                        //DNI CLIENTE
-                        dni(solicitud, array[i], sal);
+            //CORREO CLIENTE
+            correo(solicitud, array[i], sal);
 
-                        //TELEFONO CLIENTE
-                        telefono(solicitud, array[i], sal);
-
-                        //CORREO CLIENTE
-                        correo(solicitud, array[i], sal);
-
-                        //FECHA NACIMIENTO CLIENTE
-                        fechaNacimiento(solicitud, array[i], sal);
-                        
-                    }//fin bucle
+            //FECHA NACIMIENTO CLIENTE
+            fechaNacimiento(solicitud, array[i], sal);
+            //FIN llamada a metodos que piden los datos de cada cliente
+        }//fin bucle
                     
-                        //FICHEROS
-                        FileOutputStream fichero = null;
-                            
-                        try{
-                            fichero = new FileOutputStream(PATH);
-                            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-                            for (int i = 0; i < array.length; i++) {
-                            tuberia.writeObject(array[i]);
-                            }
-                        } catch(FileNotFoundException ex){
-                            ex.printStackTrace();
-                        } catch(IOException ex){
-                            ex.printStackTrace();
-                        } finally{
-                            try{
-                               fichero.close();   
-                            } catch(IOException ex){
-                                ex.printStackTrace();
-                            }
-                        }   
+        //FICHERO CLIENTES.DAT
+        FileOutputStream fichero = null;
+        //a continuacion guardaremos los registros en el fichero clientes.dat (PATH)
+        try{
+            fichero = new FileOutputStream(PATH);
+            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+            for (int i = 0; i < array.length; i++) {
+                tuberia.writeObject(array[i]); //recorre el array de clientes y lo va guardando en el archivo
+            }
+        } catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        } catch(IOException ex){
+            ex.printStackTrace();
+        } finally{
+            try{
+               fichero.close();   
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+        }   
     }
     
-    
+    //metodo para opcion 2-> listar clientes
     public static void listarClientes(Cliente array[], String PATH){
         FileInputStream ficheroEntrada = null;
                     
@@ -337,7 +327,7 @@ public class AplicacionClientes {
     
     
     public static void felicitarClientes(Cliente array[]) throws Exception{
-                            //fechas
+                    //fechas
 
                     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
                     LocalDate fechaActual = LocalDate.now();  // Create a date object
