@@ -29,7 +29,7 @@ public class AplicacionClientes {
     /**
      * @param args the command line arguments
      */
-        //variables para colores a usar en consola
+    //variables para colores a usar en consola
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
@@ -38,12 +38,10 @@ public class AplicacionClientes {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
         
-        
-
-        final String PATH = "clientes.dat";
+        final String PATH = "clientes.dat"; //fichero clientes.dat
         File fich = new File(PATH);
         
-        Cliente array[] = new Cliente[3];
+        Cliente array[] = new Cliente[3]; //cantidad de clientes 
         
         // instanciamos la clase de solicitudes por teclado
         FuncionamientoApp solicitud = new FuncionamientoApp();
@@ -52,8 +50,8 @@ public class AplicacionClientes {
         do { 
             opcio = solicitud.menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
             switch (opcio) {
-                case 1: 
-                    
+                
+                case 1:                     
                     //llamada al metodo que comprueba si existe clientes.dat
                     compruebaSiExisteFichero(fich);
                     System.out.println("A continuación, pediremos los datos de los clientes y los guardaremos en un fichero:");
@@ -71,14 +69,14 @@ public class AplicacionClientes {
                     System.out.println("A continuación, podrá buscar al cliente que desee mediante su DNI:");
                     //buscar un cliente
                     buscaDni(array);
-       
                     break;
+                    
                 case 4:
                     System.out.println("A continuación, se recorre el archivo clientes.dat y si hay algún cliente que cumpla años a lo largo de esta semana, se guarda en un fichero junto a sus datos.\n");
                     //llamada al metodo para felicitar clientes
                     felicitarClientes(array);
-                    
                     break;
+                    
                 case 5:
                     //borrar fichero clientes
                     //Esta opción eliminará del disco el fichero clientes.dat.  
@@ -87,18 +85,18 @@ public class AplicacionClientes {
                     System.out.println("A continuación se borrará el fichero de clientes.dat y felicitacionClientes.txt");
                     //llamada al metodo que borra los archivos
                     borrarFicheros(fich, PATH);
-                    
                     break;
+                    
                 case 6:
                     //salir de la aplicacion
                     System.out.println(ANSI_BLUE_BACKGROUND+ANSI_WHITE+"Hasta pronto. Gracias por usar nuestra aplicación."+ANSI_RESET);
                     break;
+                    
                 default: 
                     System.out.println("Final de programa");
             } 
         } while (opcio==1 || opcio == 2 || opcio==3 || opcio == 4 || opcio == 5);
-
-    }
+    } //fin metodo main
 
     //metodos para pedir info de los clientes en la opcion 1
     public static void nombre(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
@@ -153,8 +151,7 @@ public class AplicacionClientes {
                 }
             } while (!sal);
     }
-    
-    
+        
     public static void correo(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
             do {  
                 sal = false;
@@ -172,8 +169,7 @@ public class AplicacionClientes {
                 }
             } while (!sal);
     }
-    
-    
+       
     public static void fechaNacimiento(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
             do {  
                 sal = false;
@@ -244,31 +240,31 @@ public class AplicacionClientes {
     
     //metodo para opcion 2-> listar clientes
     public static void listarClientes(Cliente array[], String PATH){
-        FileInputStream ficheroEntrada = null;
-                    
-             
-                        Cliente c;
-                        try{
-                            ficheroEntrada = new FileInputStream(PATH);
-                            ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
-                            for (int i = 0; i < array.length; i++) {
-                                System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
-                                array[i] = (Cliente)tuberiaEntrada.readObject();
-                                array[i].mostrarCliente();
-                            }
-                        } catch(FileNotFoundException ex){
-                            ex.printStackTrace();
-                        } catch(IOException ex){
-                            ex.printStackTrace();
-                        } catch(ClassNotFoundException ex){
-                            ex.printStackTrace();
-                        } finally{
-                            try{
-                               ficheroEntrada.close();   
-                            } catch(IOException ex){
-                                ex.printStackTrace();
-                            }
-                        } 
+        //Esta opción recorrerá el fichero mostrando por pantalla los datos de los clientes almacenados en el mismo.
+        FileInputStream ficheroEntrada = null; 
+        Cliente c;
+        try{
+            ficheroEntrada = new FileInputStream(PATH);
+            ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
+            for (int i = 0; i < array.length; i++) { //recorremos el array de clientes
+                System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
+                array[i] = (Cliente)tuberiaEntrada.readObject();
+                //llamada al metodo mostrarCliente de la clase Cliente
+                array[i].mostrarCliente();
+            }
+        } catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        } catch(IOException ex){
+            ex.printStackTrace();
+        } catch(ClassNotFoundException ex){
+            ex.printStackTrace();
+        } finally{
+            try{
+               ficheroEntrada.close();   
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+        } 
     }
     
     //metodo que busca el dni para la opcion 3
@@ -395,10 +391,12 @@ public class AplicacionClientes {
         }
     }
     
+    //metodo que comprueba si existe el fichero asignado en el atributo
     public static void compruebaSiExisteFichero(File comprobarArchivo) throws Exception{
         if (comprobarArchivo.exists()) {
-                        System.err.println("Ya existe el fichero "+comprobarArchivo);
-                        throw new Exception("Ya existe el fichero "+comprobarArchivo);
-                    }
+            System.err.println("Ya existe el fichero "+comprobarArchivo);
+            throw new Exception("Ya existe el fichero "+comprobarArchivo);
+        }
     }
+    
 }

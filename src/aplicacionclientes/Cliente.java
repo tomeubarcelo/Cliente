@@ -184,9 +184,7 @@ public class Cliente implements Serializable {
     }
     
     public boolean validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {
-
-        //DateFormat format = new SimpleDateFormat("DD/MM/YYYY"); // Creamos un formato de fecha
-        //Date fecha = format.parse(entrada); // Creamos un date con la entrada en el formato especificado
+        //metodo para validar fecha de nacimiento
         
         Pattern pat = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
         Matcher mat = pat.matcher(fechaNacimiento);
@@ -199,7 +197,7 @@ public class Cliente implements Serializable {
         }
     }
     
-    public void mostrarCliente(){
+    public void mostrarCliente(){ //metodo que muestra los clientes -> opcion 2 Listar clientes
         System.out.println("Nombre: "+nombre);
         System.out.println("DNI: "+NIF);
         System.out.println("Telefono: "+telefono);
