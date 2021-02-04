@@ -235,18 +235,19 @@ public class AplicacionClientes {
 
                     if ((!(fich.exists()))&&(!(archivoFelicitar.exists()))){
                         System.err.println("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
-                        //throw new Exception("No existe el fichero");
-                    } else if (!(fich.exists())){
-                        System.err.println("No existe el fichero "+fich);
+                        throw new Exception("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
+                    } else if (!(fich.exists())){                       
                         File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
                         ficheroClientesParaBorrar.delete();
                         System.out.println("Borrado "+archivoFelicitar);
+                        System.err.println("No existe el fichero "+fich);
+                        throw new Exception("No existe el fichero "+fich);
                     } else if (!(archivoFelicitar.exists())){
                         File ficheroParaBorrar = new File(PATH);
                         ficheroParaBorrar.delete();
                         System.out.println("Borrado "+fich);
                         System.err.println("No existe el fichero "+archivoFelicitar);
-                        //throw new Exception("No existe el fichero");
+                        throw new Exception("No existe el fichero"+archivoFelicitar);
                     } else {
                         File ficheroParaBorrar = new File(PATH);
                         ficheroParaBorrar.delete();
@@ -257,12 +258,13 @@ public class AplicacionClientes {
                     }
                     break;
                 case 6:
-                    System.out.println("6");
+                    //System.out.println("6");
+                    System.out.println(ANSI_BLUE_BACKGROUND+ANSI_WHITE+"Hasta pronto. Gracias por usar nuestra aplicación."+ANSI_RESET);
                     break;
                 default: 
                     System.out.println("Final de programa");
             } 
-        } while (opcio==1 || opcio == 2 || opcio==3 || opcio == 4);
+        } while (opcio==1 || opcio == 2 || opcio==3 || opcio == 4 || opcio == 5);
 
     
         
