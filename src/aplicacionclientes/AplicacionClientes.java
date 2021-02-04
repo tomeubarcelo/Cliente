@@ -293,113 +293,106 @@ public class AplicacionClientes {
         //si no se ha encontrado
         if (!encontrado){
             System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
-        }
-                    
+        }                   
     }
     
+    //metodo para borrar ficheros -> opcion 5
     public static void borrarFicheros(File fich, String PATH) throws Exception{
-                    File archivoFelicitar = new File("felicitacionClientes.txt");
-                    
-                    if ((!(fich.exists()))&&(!(archivoFelicitar.exists()))){
-                        System.err.println("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
-                        throw new Exception("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
-                    } else if (!(fich.exists())){                       
-                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
-                        ficheroClientesParaBorrar.delete();
-                        System.out.println("Borrado "+archivoFelicitar);
-                        System.err.println("No existe el fichero "+fich);
-                        throw new Exception("No existe el fichero "+fich);
-                    } else if (!(archivoFelicitar.exists())){
-                        File ficheroParaBorrar = new File(PATH);
-                        ficheroParaBorrar.delete();
-                        System.out.println("Borrado "+fich);
-                        System.err.println("No existe el fichero "+archivoFelicitar);
-                        throw new Exception("No existe el fichero"+archivoFelicitar);
-                    } else {
-                        File ficheroParaBorrar = new File(PATH);
-                        ficheroParaBorrar.delete();
-                        System.out.println("Borrado "+fich);
-                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
-                        ficheroClientesParaBorrar.delete();
-                        System.out.println("Borrado "+archivoFelicitar);
-                    }
+        //Esta opción eliminará del disco el fichero clientes.dat.  
+        //Si el fichero no existe, se mostrará un mensaje por pantalla indicando que el fichero no existe.
+        //Haremos lo mismo con el fichero felicitacionClientes.txt
+        File archivoFelicitar = new File("felicitacionClientes.txt");
+
+        if ((!(fich.exists()))&&(!(archivoFelicitar.exists()))){ //si no existe ninguno de los 2
+            System.err.println("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
+            throw new Exception("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
+        } else if (!(fich.exists())){ //si solo existe felicitacionClientes lo borraremos                       
+            File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
+            ficheroClientesParaBorrar.delete();
+            System.out.println("Borrado "+archivoFelicitar);
+            System.err.println("No existe el fichero "+fich);
+            throw new Exception("No existe el fichero "+fich);
+        } else if (!(archivoFelicitar.exists())){ //si solo existe clientes.dat lo borraremos
+            File ficheroParaBorrar = new File(PATH);
+            ficheroParaBorrar.delete();
+            System.out.println("Borrado "+fich);
+            System.err.println("No existe el fichero "+archivoFelicitar);
+            throw new Exception("No existe el fichero"+archivoFelicitar);
+        } else { //si existen los 2 borramos los 2
+            File ficheroParaBorrar = new File(PATH);
+            ficheroParaBorrar.delete();
+            System.out.println("Borrado "+fich);
+            File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
+            ficheroClientesParaBorrar.delete();
+            System.out.println("Borrado "+archivoFelicitar);
+        }
     }
     
-    
+    //metodo para felicitar clientes -> opcion 4
     public static void felicitarClientes(Cliente array[]) throws Exception{
-                    //fechas
+        //Esta opción recorrerá el fichero y creará un nuevo fichero de texto con el nombre, fecha de nacimiento, 
+        //teléfono y correo electrónico de los clientes que celebren el cumpleaños en el margen de hasta una 
+        //semana antes (una línea de texto para cada cliente a felicitar).
+        
+        //debemos trabajar con fechas por eso usaremos clases como LocalDate o DateTimeFormatter
+        //formato que usaremos para las fechas
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+        LocalDate fechaActual = LocalDate.now();  //Crea un objeto LocalDate con la fecha actual
+        //System.out.println("Hoy es dia: "+fechaActual);  // Muestra la fecha actual
+        String formattedDate = fechaActual.format(myFormatObj); //fecha actual con el formato dd/mm/yyyy  
+        //System.out.println("After Formatting: " + formattedDate + "\nDay: "+fechaActual.getDayOfMonth() + ", month: "+fechaActual.getMonthValue());  
 
-                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-                    LocalDate fechaActual = LocalDate.now();  // Create a date object
-                    //System.out.println("Hoy es dia: "+fechaActual);  // Muestra la fecha actual
-                    String formattedDate = fechaActual.format(myFormatObj);  
-                    //System.out.println("After Formatting: " + formattedDate + "\nDay: "+fechaActual.getDayOfMonth() + ", month: "+fechaActual.getMonthValue());  
-                    
-                    //fecha de hoy + 7 dias
-                    LocalDate fechaDeHoyMasUnaSemana = fechaActual.plusDays(7);
-                    //System.out.println("Le sumamos 7: " +fechaActual.plusDays(7));  
-                    //System.out.println("Le restamos 7: " +fechaActual.minusDays(7));  
-                                
-                    
-                    
-                    File archivo = new File("felicitacionClientes.txt");
-                    /*if (archivo.exists()) {
-                        System.err.println("Ya existe el fichero "+archivo);
-                        throw new Exception("Ya existe el fichero "+archivo);
-                    }*/
-                    compruebaSiExisteFichero(archivo);
-                    
-                    for (int i = 0; i < array.length; i++) {
-                        if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
-                            //si el formato de fecha es valido...
-                            //System.out.println("Fecha introducida por el usuario "+array[i].getFechaNacimiento());
+        //fecha de hoy + 7 dias
+        LocalDate fechaDeHoyMasUnaSemana = fechaActual.plusDays(7);
 
-                            
-                            LocalDate localDate = LocalDate.parse(array[i].getFechaNacimiento(), myFormatObj);
-                            //System.out.println(localDate);
-                            
-                            //debemos averiguar los años de diferencia, para que los 2 esten en el mismo año
-                            //System.out.println("Año actual: "+fechaActual.getYear());
-                            //System.out.println("Año nacimiento cliente: "+localDate.getYear());
-                            int differ = fechaActual.getYear() - localDate.getYear();
-                            //System.out.println("La diferencia de años es: "+differ);
-                            LocalDate anyoClienteActual = localDate.plusYears(differ);
-                            //System.out.println("Por lo tanto ahora es: "+anyoClienteActual);
-                            //System.out.println("Fecha de hoy: "+fechaActual);
-                            //System.out.println("Cumpleaños del cliente en ste año: "+anyoClienteActual);
-                            
-                            
-                            //System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
-                            
-                            //condicional para saber si el cumpleaños del cliente esta entre el dia de hoy y el el dia de hoy+7
-                            //ambos dias incluidos
-                            if ((anyoClienteActual.isAfter(fechaActual)|| anyoClienteActual.isEqual(fechaActual))&& (anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)|| anyoClienteActual.isEqual(fechaDeHoyMasUnaSemana) )) {
-                                System.out.println("El cliente "+array[i].getNombre() +" cumple años esta semana");
-                                String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
-                                String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
-                                
-                                System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
-                                
-                                //crearemos el nuevo fichero para felicitar clientes                           
-                                PrintWriter out = null;
-                                out = new PrintWriter(new FileWriter("felicitacionClientes.txt",true));        
-                                BufferedReader br = new BufferedReader(
-                                        new InputStreamReader(System.in)
-                                );
-                                out.println("FELICIDADES "+array[i].getNombre()+"!!! Cumplirás años el "+formatoCorrectoAnyoClienteActual);
-                                out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
-                                out.close();
-                        
+        File archivo = new File("felicitacionClientes.txt");
+        compruebaSiExisteFichero(archivo); //comprobamos si ya existe el fichero
 
-                            } else{ //caso en el que el cliente no cumpla el cumpleaños en el margen de tiempo estipulado
-                                String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
-                                String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
-                                System.out.println("El cliente "+array[i].getNombre() +" NO cumple años esta semana");
-                                System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y NO está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
-                            }
-                        }
-                        System.out.println("\n");
-                    }
+        for (int i = 0; i < array.length; i++) { //bucle para recorrer el array de los clientes
+            if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){ //si el formato de fecha es valido...
+               
+                //transformamos a LocalDate la fecha introducida por el usuario ya con el formato dd/mm/yyyy
+                LocalDate localDate = LocalDate.parse(array[i].getFechaNacimiento(), myFormatObj);
+                
+                //debemos averiguar los años de diferencia que faltan para llegar al año actual
+                //para sumarle dicha diferencia y saber cuando es su cumpleaños este año
+                //System.out.println("Año actual: "+fechaActual.getYear());
+                //System.out.println("Año nacimiento cliente: "+localDate.getYear());
+                int differ = fechaActual.getYear() - localDate.getYear(); //hacemos la resta
+                //System.out.println("La diferencia de años es: "+differ);
+                LocalDate anyoClienteActual = localDate.plusYears(differ); //sumamos mediante el metodo plusYears
+                //System.out.println("Fecha de hoy: "+fechaActual);
+                //System.out.println("Cumpleaños del cliente en este año: "+anyoClienteActual);
+                //System.out.println("Fecha de hoy mas una semana: "+fechaDeHoyMasUnaSemana);
+
+                //condicional para saber si el cumpleaños del cliente esta entre el dia de hoy y el el dia de hoy+7
+                //ambos dias incluidos
+                if ((anyoClienteActual.isAfter(fechaActual)|| anyoClienteActual.isEqual(fechaActual))&& (anyoClienteActual.isBefore(fechaDeHoyMasUnaSemana)|| anyoClienteActual.isEqual(fechaDeHoyMasUnaSemana) )) {
+                    System.out.println("El cliente "+array[i].getNombre() +" cumple años esta semana");
+                    String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
+                    String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
+
+                    System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
+
+                    //en el caso de que los cumpla esta semana crearemos el nuevo fichero para felicitar clientes          
+                    PrintWriter out = null;
+                    out = new PrintWriter(new FileWriter("felicitacionClientes.txt",true));        
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(System.in)
+                    );
+                    //texto que se verá en el archivo felicitacionClientes.txt de cada cliente
+                    out.println("FELICIDADES "+array[i].getNombre()+"!!! Cumplirás años el "+formatoCorrectoAnyoClienteActual);
+                    out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
+                    out.close();
+                } else{ //caso en el que el cliente no cumpla el cumpleaños en el margen de tiempo estipulado
+                    String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
+                    String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
+                    System.out.println("El cliente "+array[i].getNombre() +" NO cumple años esta semana");
+                    System.out.println("Su cumpleaños es: "+formatoCorrectoAnyoClienteActual + " y NO está entre: "+formattedDate + " y "+formatoCorrectoFechaMasUnaSemana);
+                }
+            }
+            System.out.println("\n");
+        }
     }
     
     public static void compruebaSiExisteFichero(File comprobarArchivo) throws Exception{
