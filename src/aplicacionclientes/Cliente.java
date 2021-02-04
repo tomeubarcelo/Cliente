@@ -179,14 +179,14 @@ public class Cliente implements Serializable {
     //metodo para validar fecha de nacimiento
     public boolean validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {    
         //formato que usaremos
-        Pattern pat = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
+        Pattern pat = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/)(0[1-9]|1[0-2])\\2(\\d{4})$");
         Matcher mat = pat.matcher(fechaNacimiento);
         if(mat.find()){ //si es correcto
             //System.out.println(fechaNacimiento);
             return true;
         }else{
-            System.err.println ("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
-            throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY' o 'DD-MM-YYYY'");
+            System.err.println ("Formato de fecha incorrecto. Use 'DD/MM/YYYY'");
+            throw new Exception("Formato de fecha incorrecto. Use 'DD/MM/YYYY'");
         }
     }
     
