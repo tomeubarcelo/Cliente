@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -35,6 +36,7 @@ public class AplicacionClientes {
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
     
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
@@ -270,28 +272,37 @@ public class AplicacionClientes {
     }
     
     //metodo que busca el dni para la opcion 3
-    public static void buscaDni(Cliente array[]){
+    public static void buscaDni(Cliente array[]) throws Exception{
         boolean encontrado = false;
+        boolean sal = false;
+        String dniParaBuscar;
         Scanner entradaScanner = new Scanner (System.in);
         System.out.println("Introduce el DNI a buscar:");
-        String dniParaBuscar = entradaScanner.nextLine();
+        do{
 
-        //recorremos el array de clientes
-        for (int i = 0; i < array.length; i++) {
-            //si algun dni del array coincide con el dni introducido
-            if (array[i].getNIF().equals(dniParaBuscar)) {
-                System.out.println("\nSe han encontrado los datos del cliente con DNI: " + ANSI_BLUE+dniParaBuscar+ANSI_RESET);
-                System.out.println("Nombre: " + array[i].getNombre());
-                System.out.println("Telefono: " + array[i].getTelefono());
-                System.out.println("Correo: " + array[i].getCorreo());
-                System.out.println("Fecha de nacimiento: " + array[i].getFechaNacimiento());
-                encontrado = true;
+            dniParaBuscar = entradaScanner.nextLine();
+        
+            if (validaDni(dniParaBuscar, sal)) { //si el formato de dni es correcto
+                //System.out.println("DNI correcto");
+                //recorremos el array de clientes
+                for (int i = 0; i < array.length; i++) {
+                    //si algun dni del array coincide con el dni introducido
+                    if (array[i].getNIF().equals(dniParaBuscar)) {
+                        System.out.println("\nSe han encontrado los datos del cliente con DNI: " + ANSI_BLUE+dniParaBuscar+ANSI_RESET);
+                        System.out.println("Nombre: " + array[i].getNombre());
+                        System.out.println("Telefono: " + array[i].getTelefono());
+                        System.out.println("Correo: " + array[i].getCorreo());
+                        System.out.println("Fecha de nacimiento: " + array[i].getFechaNacimiento()+"\n");
+                        sal = true; //salimos del bucle do-while
+                    } else{ //el dni es correcto pero ningun cliente lo tienes
+                        System.out.println("El cliente "+array[i].getNombre()+" no tiene este DNI");
+                        sal = true; //salimos del bucle do-while
+                    }
+                }
+            } else {
+                System.out.println("Vuelva a introducir el DNI:");
             }
-        }
-        //si no se ha encontrado
-        if (!encontrado){
-            System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
-        }                   
+        }while(!sal);  
     }
     
     //metodo para borrar ficheros -> opcion 5
@@ -391,7 +402,12 @@ public class AplicacionClientes {
             }
             System.out.println("\n");
         }
-        System.out.println(ANSI_GREEN_BACKGROUND+"Fichero creado correctamente."+ANSI_RESET);
+        if (archivo.exists()) {
+            System.out.println(ANSI_GREEN_BACKGROUND+"Fichero creado correctamente."+ANSI_RESET);
+        } else{
+            System.out.println(ANSI_RED_BACKGROUND+ANSI_WHITE+"El fichero no se ha creado ya que ningún cliente cumple años en el margen de tiempo estipulado."+ANSI_RESET);
+        }
+        
     }
     
     //metodo que comprueba si existe el fichero asignado en el atributo
@@ -401,5 +417,48 @@ public class AplicacionClientes {
             throw new Exception("Ya existe el fichero "+comprobarArchivo);
         }
     }
-    
+    public static boolean validaDni(String dniCliente, boolean correcto) throws Exception{
+        //metodo para validad DNI
+        //Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
+        String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
+        
+        //array de caracteres que pueden ir con los digitos del dni
+        char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+        
+        correcto = false;
+        try {
+            if (Pattern.matches(dniRegexp, dniCliente)) { //comprobamos que tenga el formato correcto
+                //System.out.println("dni con formato correcto");
+                //guardamos los digitos
+                String numDni = dniCliente.substring(0, 8);
+                //los pasamos a int
+                int numbers = Integer.parseInt(numDni);
+                //calculamos el resto del numero de dni entre 23
+                int resto = numbers%23;
+                //guardamos el caracter del dni
+                char letraDni = dniCliente.charAt(dniCliente.length() - 1);
+                //System.out.println(letraDni);
+                //para calcular la letra que deberia ser, cogeremos el caracter del array en la posicion del resto
+                //si la letra inroducida es igual que la letra que tocaria ser es correcto
+                if(letras[resto]==letraDni) {
+                    //System.out.println("DNI CORRECTO");
+                    correcto = true;
+                    //return correcto;
+
+                } else{
+                    System.err.println ("La letra no coincide con sus digitos del DNI");
+                    System.err.println ("Su DNI debería ser: "+numDni+"-"+letras[resto]);
+                    correcto = false;
+                }
+            } else {
+                //System.err.println("Length dini: "+dniCliente.length());
+                System.err.println ("Introduzca el formato correcto: 12345678A");
+                correcto = false;
+            }
+        } catch (NumberFormatException e) {
+            throw new Exception("DNI incorrecto");
+            
+        }
+        return correcto;
+    }
 }
