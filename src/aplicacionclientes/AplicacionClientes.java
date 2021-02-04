@@ -62,53 +62,8 @@ public class AplicacionClientes {
                     }*/
                     //FIN COMPROBAR
                     compruebaSiExisteFichero(fich);
-
-                    for (int i = 0; i < array.length; i++) {
-                        // Tenemos un array de 5 elementos.
-
-                        
-                        array[i] = new Cliente();
-                        System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
-                        boolean sal = false;
-
-
-                        //NOMBRE CLIENTE
-                        nombre(solicitud, array[i], sal);
-
-                        //DNI CLIENTE
-                        dni(solicitud, array[i], sal);
-
-                        //TELEFONO CLIENTE
-                        telefono(solicitud, array[i], sal);
-
-                        //CORREO CLIENTE
-                        correo(solicitud, array[i], sal);
-
-                        //FECHA NACIMIENTO CLIENTE
-                        fechaNacimiento(solicitud, array[i], sal);
-                        
-                    }//fin bucle
-                    
-                        //FICHEROS
-                        FileOutputStream fichero = null;
-                            
-                        try{
-                            fichero = new FileOutputStream(PATH);
-                            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-                            for (int i = 0; i < array.length; i++) {
-                            tuberia.writeObject(array[i]);
-                            }
-                        } catch(FileNotFoundException ex){
-                            ex.printStackTrace();
-                        } catch(IOException ex){
-                            ex.printStackTrace();
-                        } finally{
-                            try{
-                               fichero.close();   
-                            } catch(IOException ex){
-                                ex.printStackTrace();
-                            }
-                        }            
+                    crearFicheroClientes(array, solicitud, PATH);
+                             
                     
                     break;
 
@@ -247,6 +202,56 @@ public class AplicacionClientes {
     }
     //FIN metodos para pedir info de los clientes en la opcion 1
     
+    public static void crearFicheroClientes(Cliente array[], FuncionamientoApp solicitud, String PATH) throws Exception{
+    
+        for (int i = 0; i < array.length; i++) {
+                        // Tenemos un array de 5 elementos.
+
+                        
+                        array[i] = new Cliente();
+                        System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
+                        boolean sal = false;
+
+
+                        //NOMBRE CLIENTE
+                        nombre(solicitud, array[i], sal);
+
+                        //DNI CLIENTE
+                        dni(solicitud, array[i], sal);
+
+                        //TELEFONO CLIENTE
+                        telefono(solicitud, array[i], sal);
+
+                        //CORREO CLIENTE
+                        correo(solicitud, array[i], sal);
+
+                        //FECHA NACIMIENTO CLIENTE
+                        fechaNacimiento(solicitud, array[i], sal);
+                        
+                    }//fin bucle
+                    
+                        //FICHEROS
+                        FileOutputStream fichero = null;
+                            
+                        try{
+                            fichero = new FileOutputStream(PATH);
+                            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+                            for (int i = 0; i < array.length; i++) {
+                            tuberia.writeObject(array[i]);
+                            }
+                        } catch(FileNotFoundException ex){
+                            ex.printStackTrace();
+                        } catch(IOException ex){
+                            ex.printStackTrace();
+                        } finally{
+                            try{
+                               fichero.close();   
+                            } catch(IOException ex){
+                                ex.printStackTrace();
+                            }
+                        }   
+    }
+    
     
     public static void listarClientes(Cliente array[], String PATH){
         FileInputStream ficheroEntrada = null;
@@ -287,7 +292,7 @@ public class AplicacionClientes {
         for (int i = 0; i < array.length; i++) {
             //si algun dni del array coincide con el dni introducido
             if (array[i].getNIF().equals(dniParaBuscar)) {
-                System.out.println("\nSe han encontrado los datos del cliente con DNI: " + dniParaBuscar);
+                System.out.println("\nSe han encontrado los datos del cliente con DNI: " + ANSI_BLUE+dniParaBuscar+ANSI_RESET);
                 System.out.println("Nombre: " + array[i].getNombre());
                 System.out.println("Telefono: " + array[i].getTelefono());
                 System.out.println("Correo: " + array[i].getCorreo());
