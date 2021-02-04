@@ -23,7 +23,6 @@ public class Cliente implements Serializable {
     private String correo;
     private String fechaNacimiento;
     
-
     //constructor con sus atributos
     public Cliente(String NIF, String nombre, String telefono, String correo, String fechaNacimiento) {
         this.NIF = NIF;
@@ -80,23 +79,23 @@ public class Cliente implements Serializable {
     }
     //FIN GETTERS Y SETTERS
     
+    //metodo para validar el nombre
     public boolean validaNombre(String nombreCliente) throws Exception{
         
         boolean contieneSoloLetras = contieneSoloLetras(nombreCliente);
         //con el metodo contieneSoloLetras(nombreCliente) comprobaremos si solo tiene letras
-            if (nombreCliente.length() > 40) { //si supera 40 caracteres -> error
-                //System.err.println ("Ha superado el límite de carácteres");
-                throw new Exception("Ha superado el límite de carácteres");
-            } else if (nombreCliente.length() < 2){
-                //System.err.println ("No llega al mínimo de carácteres");
-                throw new Exception("No llega al mínimo de carácteres");
-            }
-            else if(contieneSoloLetras==false){ //si no contiene letras -> error
-                //System.err.println ("Solo debe contener letras");
-                throw new Exception("Solo debe contener letras");
-            } else { //devuelve el nombre correctamente
-                return true; // Valor válido: lo almacenamos
-            }
+        if (nombreCliente.length() > 40) { //si supera 40 caracteres -> error
+            //System.err.println ("Ha superado el límite de carácteres");
+            throw new Exception("Ha superado el límite de carácteres");
+        } else if (nombreCliente.length() < 2){
+            //System.err.println ("No llega al mínimo de carácteres");
+            throw new Exception("No llega al mínimo de carácteres");
+        } else if(contieneSoloLetras==false){ //si no contiene letras -> error
+            //System.err.println ("Solo debe contener letras");
+            throw new Exception("Solo debe contener letras");
+        } else { //devuelve el nombre correctamente
+            return true; // Valor válido: lo almacenamos
+        }
     }
     
     public static boolean contieneSoloLetras(String cadena) {
@@ -112,14 +111,15 @@ public class Cliente implements Serializable {
     }
     
     public boolean validaDni(String dniCliente) throws Exception{
-        Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
+        //metodo para validad DNI
+        //Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
         String dniRegexp = "\\d{8}[A-HJ-NP-TV-Z]";
         
         //array de caracteres que pueden ir con los digitos del dni
         char[] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
 
         try {
-            if (Pattern.matches(dniRegexp, dniCliente)) {
+            if (Pattern.matches(dniRegexp, dniCliente)) { //comprobamos que tenga el formato correcto
                 //System.out.println("dni con formato correcto");
                 //guardamos los digitos
                 String numDni = dniCliente.substring(0, 8);
@@ -127,11 +127,6 @@ public class Cliente implements Serializable {
                 int numbers = Integer.parseInt(numDni);
                 //calculamos el resto del numero de dni entre 23
                 int resto = numbers%23;
-                /*
-                System.out.println(numbers);
-                System.out.println(resto);
-                System.out.println(letras[resto]);
-                */
                 //guardamos el caracter del dni
                 char letraDni = dniCliente.charAt(dniCliente.length() - 1);
                 //System.out.println(letraDni);
@@ -153,12 +148,11 @@ public class Cliente implements Serializable {
         } catch (Exception e) {
             throw new Exception("DNI incorrecto");
         }
-
-
     }
-
+    
+    //metodo que valida el numero de tlf
     public boolean validaTelefono(String numTlf) throws Exception {
-
+        //es un telefono correcto si tiene 9 digitos
         if (numTlf.length() == 9) {
             //return numTlf;
             return true;
@@ -166,15 +160,14 @@ public class Cliente implements Serializable {
             System.err.println ("Número de teléfono incorrecto");
             throw new Exception("Número de teléfono incorrecto");
         }
-
     }
     
+    //metodo que valida el correo electronico
     public boolean validaCorreo(String correo) throws Exception{
-
         //http://puntocomnoesunlenguaje.blogspot.com/2013/07/ejemplos-expresiones-regulares-java-split.html
         Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");   
         Matcher mat = pat.matcher(correo);
-        if(mat.find()){
+        if(mat.find()){ //es un correo valido
             //System.out.println("Correo Válido");
             return true;
         }else{
@@ -183,12 +176,12 @@ public class Cliente implements Serializable {
         }
     }
     
-    public boolean validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {
-        //metodo para validar fecha de nacimiento
-        
+    //metodo para validar fecha de nacimiento
+    public boolean validaFechaNacimiento(String fechaNacimiento) throws ParseException, Exception {    
+        //formato que usaremos
         Pattern pat = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
         Matcher mat = pat.matcher(fechaNacimiento);
-        if(mat.find()){
+        if(mat.find()){ //si es correcto
             //System.out.println(fechaNacimiento);
             return true;
         }else{
@@ -197,11 +190,13 @@ public class Cliente implements Serializable {
         }
     }
     
-    public void mostrarCliente(){ //metodo que muestra los clientes -> opcion 2 Listar clientes
+    //metodo que muestra los clientes -> opcion 2 Listar clientes
+    public void mostrarCliente(){ 
         System.out.println("Nombre: "+nombre);
         System.out.println("DNI: "+NIF);
         System.out.println("Telefono: "+telefono);
         System.out.println("Correo: "+correo);
         System.out.println("Fecha nacimiento: "+fechaNacimiento);
     }
+    
 }

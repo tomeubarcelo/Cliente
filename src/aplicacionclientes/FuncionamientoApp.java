@@ -19,7 +19,7 @@ public class FuncionamientoApp {
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_WHITE = "\u001B[37m";
     
-    public byte menuOpcions() {
+    public byte menuOpcions() { //metodo para las opciones del menu principal
         byte opcio=0;
         do{
             try{
@@ -39,12 +39,12 @@ public class FuncionamientoApp {
             }    
             catch(Exception e){
                 System.out.println("Error al leer del teclado(1..6)!.");
-            }
-            
+            } 
         }while (opcio < 1 || opcio > 6);
         return opcio;
     }
     
+    //METODOS QUE PIDEN DATOS DE LOS CLIENTES
     public String pideNombre() {
         Scanner entradaScanner = new Scanner (System.in);
         System.out.println("Introduce tu nombre y apellidos.");
@@ -79,4 +79,5 @@ public class FuncionamientoApp {
         String fechaNac = entradaScanner.nextLine();
         return fechaNac;
     }
+    //FIN METODOS QUE PIDEN DATOS DE LOS CLIENTES
 }
