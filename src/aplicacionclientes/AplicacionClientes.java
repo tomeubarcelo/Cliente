@@ -230,12 +230,30 @@ public class AplicacionClientes {
                     break;
                 case 5:
                     System.out.println("5");
-                    if (!(fich.exists())){
-                        System.err.println("No existe el fichero");
+                    
+                    File archivoFelicitar = new File("felicitacionClientes.txt");
+
+                    if ((!(fich.exists()))&&(!(archivoFelicitar.exists()))){
+                        System.err.println("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
+                        //throw new Exception("No existe el fichero");
+                    } else if (!(fich.exists())){
+                        System.err.println("No existe el fichero "+fich);
+                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
+                        ficheroClientesParaBorrar.delete();
+                        System.out.println("Borrado "+archivoFelicitar);
+                    } else if (!(archivoFelicitar.exists())){
+                        File ficheroParaBorrar = new File(PATH);
+                        ficheroParaBorrar.delete();
+                        System.out.println("Borrado "+fich);
+                        System.err.println("No existe el fichero "+archivoFelicitar);
                         //throw new Exception("No existe el fichero");
                     } else {
                         File ficheroParaBorrar = new File(PATH);
                         ficheroParaBorrar.delete();
+                        System.out.println("Borrado "+fich);
+                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
+                        ficheroClientesParaBorrar.delete();
+                        System.out.println("Borrado "+archivoFelicitar);
                     }
                     break;
                 case 6:
