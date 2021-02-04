@@ -117,32 +117,8 @@ public class AplicacionClientes {
                     System.out.println("2");
                     
                     //leer objecto DEL FICHERO
-        
-                    FileInputStream ficheroEntrada = null;
+                    listarClientes(array, PATH);
                     
-             
-                        Cliente c;
-                        try{
-                            ficheroEntrada = new FileInputStream(PATH);
-                            ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
-                            for (int i = 0; i < array.length; i++) {
-                                System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
-                                array[i] = (Cliente)tuberiaEntrada.readObject();
-                                array[i].mostrarCliente();
-                            }
-                        } catch(FileNotFoundException ex){
-                            ex.printStackTrace();
-                        } catch(IOException ex){
-                            ex.printStackTrace();
-                        } catch(ClassNotFoundException ex){
-                            ex.printStackTrace();
-                        } finally{
-                            try{
-                               ficheroEntrada.close();   
-                            } catch(IOException ex){
-                                ex.printStackTrace();
-                            }
-                        } 
                     
                     break;
                 case 3: 
@@ -270,6 +246,35 @@ public class AplicacionClientes {
             } while (!sal);
     }
     //FIN metodos para pedir info de los clientes en la opcion 1
+    
+    
+    public static void listarClientes(Cliente array[], String PATH){
+        FileInputStream ficheroEntrada = null;
+                    
+             
+                        Cliente c;
+                        try{
+                            ficheroEntrada = new FileInputStream(PATH);
+                            ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
+                            for (int i = 0; i < array.length; i++) {
+                                System.out.println("\n"+ANSI_BLUE_BACKGROUND+ANSI_WHITE+"-------Cliente "+(i+1)+"-------"+ANSI_RESET);
+                                array[i] = (Cliente)tuberiaEntrada.readObject();
+                                array[i].mostrarCliente();
+                            }
+                        } catch(FileNotFoundException ex){
+                            ex.printStackTrace();
+                        } catch(IOException ex){
+                            ex.printStackTrace();
+                        } catch(ClassNotFoundException ex){
+                            ex.printStackTrace();
+                        } finally{
+                            try{
+                               ficheroEntrada.close();   
+                            } catch(IOException ex){
+                                ex.printStackTrace();
+                            }
+                        } 
+    }
     
     //metodo que busca el dni para la opcion 3
     public static void buscaDni(Cliente array[]){
