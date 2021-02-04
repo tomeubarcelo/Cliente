@@ -212,7 +212,7 @@ public class AplicacionClientes {
                                 BufferedReader br = new BufferedReader(
                                         new InputStreamReader(System.in)
                                 );
-                                out.println("FELICIDADES "+array[i].getNombre()+"!!!");
+                                out.println("FELICIDADES "+array[i].getNombre()+"!!! Cumplirás años el "+formatoCorrectoAnyoClienteActual);
                                 out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
                                 out.close();
                         
