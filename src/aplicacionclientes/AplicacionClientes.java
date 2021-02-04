@@ -56,12 +56,12 @@ public class AplicacionClientes {
 
 
                     //comprobamos que existe el fichero para cargar los datos si es que existe
-                    if (fich.exists()){
+                    /*if (fich.exists()){
                         System.err.println("Ya existe el fichero");
                         throw new Exception("Ya existe el fichero");
-                    }
+                    }*/
                     //FIN COMPROBAR
-                    
+                    compruebaSiExisteFichero(fich);
 
                     for (int i = 0; i < array.length; i++) {
                         // Tenemos un array de 5 elementos.
@@ -348,10 +348,11 @@ public class AplicacionClientes {
                     
                     
                     File archivo = new File("felicitacionClientes.txt");
-                    if (archivo.exists()) {
+                    /*if (archivo.exists()) {
                         System.err.println("Ya existe el fichero "+archivo);
                         throw new Exception("Ya existe el fichero "+archivo);
-                    }
+                    }*/
+                    compruebaSiExisteFichero(archivo);
                     
                     for (int i = 0; i < array.length; i++) {
                         if (array[i].validaFechaNacimiento(array[i].getFechaNacimiento())){
@@ -406,4 +407,10 @@ public class AplicacionClientes {
                     }
     }
     
+    public static void compruebaSiExisteFichero(File comprobarArchivo) throws Exception{
+        if (comprobarArchivo.exists()) {
+                        System.err.println("Ya existe el fichero "+comprobarArchivo);
+                        throw new Exception("Ya existe el fichero "+comprobarArchivo);
+                    }
+    }
 }
