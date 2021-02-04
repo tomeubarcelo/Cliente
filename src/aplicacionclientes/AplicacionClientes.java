@@ -34,6 +34,7 @@ public class AplicacionClientes {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
     
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
@@ -380,7 +381,7 @@ public class AplicacionClientes {
                     //texto que se verá en el archivo felicitacionClientes.txt de cada cliente
                     out.println("FELICIDADES "+array[i].getNombre()+"!!! Cumplirás años el "+formatoCorrectoAnyoClienteActual);
                     out.println(array[i].getNombre()+", "+array[i].getFechaNacimiento()+", "+array[i].getTelefono()+", "+array[i].getCorreo()+"\n");
-                    out.close();
+                    out.close();                                        
                 } else{ //caso en el que el cliente no cumpla el cumpleaños en el margen de tiempo estipulado
                     String formatoCorrectoAnyoClienteActual = anyoClienteActual.format(myFormatObj);  
                     String formatoCorrectoFechaMasUnaSemana = fechaDeHoyMasUnaSemana.format(myFormatObj); 
@@ -390,6 +391,7 @@ public class AplicacionClientes {
             }
             System.out.println("\n");
         }
+        System.out.println(ANSI_GREEN_BACKGROUND+"Fichero creado correctamente."+ANSI_RESET);
     }
     
     //metodo que comprueba si existe el fichero asignado en el atributo
