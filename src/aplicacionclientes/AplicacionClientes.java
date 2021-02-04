@@ -234,6 +234,7 @@ public class AplicacionClientes {
                     //Si el fichero no existe, se mostrará un mensaje por pantalla indicando que el fichero no existe.
                     //Haremos lo mismo con el archivo felicitacionClientes.txt creado en la opcion 4
                     System.out.println("A continuación se borrará el fichero de clientes.dat y felicitacionClientes.txt");
+                    //llamada al metodo que borra los archivos
                     borrarFicheros(fich, PATH);
                     
                     break;
