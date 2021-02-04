@@ -229,36 +229,16 @@ public class AplicacionClientes {
                     
                     break;
                 case 5:
-                    System.out.println("5");
+                    //borrar fichero clientes
+                    //Esta opción eliminará del disco el fichero clientes.dat.  
+                    //Si el fichero no existe, se mostrará un mensaje por pantalla indicando que el fichero no existe.
+                    //Haremos lo mismo con el archivo felicitacionClientes.txt creado en la opcion 4
+                    System.out.println("A continuación se borrará el fichero de clientes.dat y felicitacionClientes.txt");
+                    borrarFicheros(fich, PATH);
                     
-                    File archivoFelicitar = new File("felicitacionClientes.txt");
-
-                    if ((!(fich.exists()))&&(!(archivoFelicitar.exists()))){
-                        System.err.println("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
-                        throw new Exception("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
-                    } else if (!(fich.exists())){                       
-                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
-                        ficheroClientesParaBorrar.delete();
-                        System.out.println("Borrado "+archivoFelicitar);
-                        System.err.println("No existe el fichero "+fich);
-                        throw new Exception("No existe el fichero "+fich);
-                    } else if (!(archivoFelicitar.exists())){
-                        File ficheroParaBorrar = new File(PATH);
-                        ficheroParaBorrar.delete();
-                        System.out.println("Borrado "+fich);
-                        System.err.println("No existe el fichero "+archivoFelicitar);
-                        throw new Exception("No existe el fichero"+archivoFelicitar);
-                    } else {
-                        File ficheroParaBorrar = new File(PATH);
-                        ficheroParaBorrar.delete();
-                        System.out.println("Borrado "+fich);
-                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
-                        ficheroClientesParaBorrar.delete();
-                        System.out.println("Borrado "+archivoFelicitar);
-                    }
                     break;
                 case 6:
-                    //System.out.println("6");
+                    //salir de la aplicacion
                     System.out.println(ANSI_BLUE_BACKGROUND+ANSI_WHITE+"Hasta pronto. Gracias por usar nuestra aplicación."+ANSI_RESET);
                     break;
                 default: 
@@ -266,12 +246,9 @@ public class AplicacionClientes {
             } 
         } while (opcio==1 || opcio == 2 || opcio==3 || opcio == 4 || opcio == 5);
 
-    
-        
-        
-
     }
 
+    //metodos para pedir info de los clientes en la opcion 1
     public static void nombre(FuncionamientoApp solicitud, Cliente cliente, boolean sal){
         do {   
             String nombreCliente = solicitud.pideNombre();
@@ -362,7 +339,9 @@ public class AplicacionClientes {
                 }
             } while (!sal);
     }
+    //FIN metodos para pedir info de los clientes en la opcion 1
     
+    //metodo que busca el dni para la opcion 3
     public static void buscaDni(Cliente array[]){
         boolean encontrado = false;
         Scanner entradaScanner = new Scanner (System.in);
@@ -386,6 +365,34 @@ public class AplicacionClientes {
             System.out.println("No se ha encontrado el DNI: "+dniParaBuscar);
         }
                     
+    }
+    
+    public static void borrarFicheros(File fich, String PATH) throws Exception{
+                    File archivoFelicitar = new File("felicitacionClientes.txt");
+                    
+                    if ((!(fich.exists()))&&(!(archivoFelicitar.exists()))){
+                        System.err.println("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
+                        throw new Exception("No existe el fichero "+fich+", ni tampoco "+archivoFelicitar);
+                    } else if (!(fich.exists())){                       
+                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
+                        ficheroClientesParaBorrar.delete();
+                        System.out.println("Borrado "+archivoFelicitar);
+                        System.err.println("No existe el fichero "+fich);
+                        throw new Exception("No existe el fichero "+fich);
+                    } else if (!(archivoFelicitar.exists())){
+                        File ficheroParaBorrar = new File(PATH);
+                        ficheroParaBorrar.delete();
+                        System.out.println("Borrado "+fich);
+                        System.err.println("No existe el fichero "+archivoFelicitar);
+                        throw new Exception("No existe el fichero"+archivoFelicitar);
+                    } else {
+                        File ficheroParaBorrar = new File(PATH);
+                        ficheroParaBorrar.delete();
+                        System.out.println("Borrado "+fich);
+                        File ficheroClientesParaBorrar = new File("felicitacionClientes.txt");
+                        ficheroClientesParaBorrar.delete();
+                        System.out.println("Borrado "+archivoFelicitar);
+                    }
     }
     
 }
