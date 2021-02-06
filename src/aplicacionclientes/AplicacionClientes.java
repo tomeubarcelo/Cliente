@@ -22,7 +22,6 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- *
  * @author tomeu barcelo pons
  * Tarea para PROG06.
  * Aplicación en Java que gestiona los clientes de una empresa. 
