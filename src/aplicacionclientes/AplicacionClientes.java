@@ -261,7 +261,6 @@ public class AplicacionClientes {
     public static void listarClientes(Cliente array[], String PATH){
         //Esta opción recorrerá el fichero mostrando por pantalla los datos de los clientes almacenados en el mismo.
         FileInputStream ficheroEntrada = null; 
-        Cliente c;
         try{
             ficheroEntrada = new FileInputStream(PATH);
             ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
@@ -433,6 +432,7 @@ public class AplicacionClientes {
             throw new Exception("Ya existe el fichero "+comprobarArchivo);
         }
     }
+    
     public static boolean validaDni(String dniCliente, boolean correcto) throws Exception{
         //metodo para validad DNI
         //Pattern pat = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
@@ -460,7 +460,6 @@ public class AplicacionClientes {
                     //System.out.println("DNI CORRECTO");
                     correcto = true;
                     //return correcto;
-
                 } else{
                     System.err.println ("La letra no coincide con sus digitos del DNI");
                     System.err.println ("Su DNI debería ser: "+numDni+"-"+letras[resto]);
@@ -472,8 +471,7 @@ public class AplicacionClientes {
                 correcto = false;
             }
         } catch (NumberFormatException e) {
-            throw new Exception("DNI incorrecto");
-            
+            throw new Exception("DNI incorrecto");        
         }
         return correcto;
     }
@@ -501,4 +499,5 @@ public class AplicacionClientes {
                 }
             }
     }
+    
 }
