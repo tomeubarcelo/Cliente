@@ -9,6 +9,7 @@ Los datos que se almacenarán sobre cada cliente son:
 - Teléfono.
 - Dirección de correo electrónico.
 - Fecha de nacimiento.
+
 Mediante un menú se podrán realizar determinadas operaciones:
 
 - Crear fichero clientes. Creará el fichero clientes.dat, pedirá los datos de los 5 clientes de la empresa y guardará los registros en el fichero creado.  Si el fichero ya existe, se mostrará un mensaje por pantalla indicando que el fichero ya está creado.
