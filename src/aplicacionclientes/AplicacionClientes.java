@@ -23,7 +23,17 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author tomeu
+ * @author tomeu barcelo pons
+ * Tarea para PROG06.
+ * Aplicación en Java que gestiona los clientes de una empresa. 
+ * Estos datos, se almacenarán en un fichero serializado, denominado clientes.dat.
+ * -----------------
+ * Ejemplos DNI:
+ * 12345678Z
+ * 43211234F
+ * 12341234D
+ * 87654321X
+ * Más en: https://www.letranif.com/
  */
 public class AplicacionClientes {
 
@@ -44,7 +54,7 @@ public class AplicacionClientes {
         final String PATH = "clientes.dat"; //fichero clientes.dat
         File fich = new File(PATH);
         
-        Cliente array[] = new Cliente[3]; //cantidad de clientes 
+        Cliente array[] = new Cliente[5]; //cantidad de clientes 
         
         // instanciamos la clase de solicitudes por teclado
         FuncionamientoApp solicitud = new FuncionamientoApp();
@@ -55,7 +65,7 @@ public class AplicacionClientes {
             opcio = solicitud.menuOpcions(); //mostra les opcions de menú i retorna l'opció escollida
             switch (opcio) {
                 
-                case 1:                     
+                case 1: //Crear fichero clientes                
                     //llamada al metodo que comprueba si existe clientes.dat
                     compruebaSiExisteFichero(fich);
                     System.out.println("A continuación, pediremos los datos de los clientes y los guardaremos en un fichero:");
@@ -63,20 +73,25 @@ public class AplicacionClientes {
                     crearFicheroClientes(array, solicitud, PATH);
                     break;
 
-                case 2: 
+                case 2: //Listar clientes
                     System.out.println("A continuación, mostraremos la lista de los clientes:");
                     //llamada a metodo para leer los clientes del fichero clientes.dat
                     listarClientes(array, PATH);
                     break;
                     
-                case 3: 
+                case 3: //buscar un cliente             
+                    //Esta opción recorrerá el fichero mostrando por pantalla los datos de los clientes almacenados
                     System.out.println("A continuación, podrá buscar al cliente que desee mediante su DNI:");
+                    //metodo necesario para cargar los datos de los clientes
+                    cargarClientes(array, PATH);
                     //buscar un cliente
                     buscaDni(array);
                     break;
                     
-                case 4:
+                case 4: //felicitar clientes
                     System.out.println("A continuación, se recorre el archivo clientes.dat y si hay algún cliente que cumpla años a lo largo de esta semana, se guarda en un fichero junto a sus datos.\n");
+                    //metodo necesario para cargar los datos de los clientes
+                    cargarClientes(array, PATH);
                     //llamada al metodo para felicitar clientes
                     felicitarClientes(array);
                     break;
@@ -461,5 +476,29 @@ public class AplicacionClientes {
             
         }
         return correcto;
+    }
+    
+    //metodo necesario para la opcion 3(buscar dni) y 4(felicitar) para que cargue los clientes
+    public static void cargarClientes(Cliente array[], String PATH){
+            FileInputStream ficheroEntrada = null; 
+            try{
+                ficheroEntrada = new FileInputStream(PATH);
+                ObjectInputStream tuberiaEntrada = new ObjectInputStream(ficheroEntrada);
+                for (int i = 0; i < array.length; i++) { //recorremos el array de clientes
+                    array[i] = (Cliente)tuberiaEntrada.readObject();
+                }
+            } catch(FileNotFoundException ex){
+                ex.printStackTrace();
+            } catch(IOException ex){
+                ex.printStackTrace();
+            } catch(ClassNotFoundException ex){
+                ex.printStackTrace();
+            } finally{
+                try{
+                   ficheroEntrada.close();   
+                } catch(IOException ex){
+                    ex.printStackTrace();
+                }
+            }
     }
 }
